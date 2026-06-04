@@ -1,13 +1,12 @@
-
       <div class="row">
         <div class="col-12">
           <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
             <div class="">
-              <h1 class="fs-3 mb-1">Cadastrar Produto</h1>
-              <p class="mb-0">Manage your inventory items</p>
+              <h1 class="fs-3 mb-1">Novo Produto</h1>
+              <p class="mb-0">Gerencie seu estoque</p>
             </div>
             <div>
-              <a href="inventory.html" class="btn btn-primary">Go to Inventory List</a>
+              <a href="inventory.html" class="btn btn-primary">Ver Todos os Produtos</a>
             </div>
           </div>
         </div>
@@ -16,68 +15,73 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body p-4">
-              <form id="addProductForm">
+              <form action="/produtos/<%= produto.id_pro ? produto.id_pro + '/editar' : 'criar' %>" method="POST" id="addProductForm">
                 <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="productName" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+                  <div class="col-md-14 mb-3">
+                    <label for="productName" class="form-label">Nome do Produto</label>
+                    <input type="text" class="form-control" id="productName" name="nome_pro" placeholder="Digite o nome do produto" required>
                   </div>
+
                   <div class="col-md-6 mb-3">
-                    <label for="productSKU" class="form-label">SKU</label>
-                    <input type="text" class="form-control" id="productSKU" placeholder="Enter SKU" required>
+                    <label for="productName" class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="productName" name="fk_marca_id_mar" placeholder="Digite a marca do produto" required>
+                  </div>
+
+
+                <div class="col-md-6 mb-3">
+                    <label for="productStock" class="form-label">Status</label>
+                    <select class="form-select" name="status_pro" required>
+                      <option value="">Selecione</option>
+                      <option value="Ativo">Ativo</option>
+                      <option value="Inativo">Inativo</option>
+                   </select>
                   </div>
                 </div>
+                 
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <label for="productPrice" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="productPrice" placeholder="0.00" step="0.01" required>
+                    <label for="productPrice" class="form-label">Preço</label>
+                    <input type="number" class="form-control" id="productPrice" name="preco_pro" placeholder="0.00" step="0.01" required>
                   </div>
                   <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Stock Quantity</label>
-                    <input type="number" class="form-control" id="productStock" placeholder="0" required>
+                    <label for="productStock" class="form-label">Quantidade</label>
+                    <input type="number" class="form-control" id="productStock" name="quantidade_pro" placeholder="0" required>
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="productCategory" class="form-label">Category</label>
-                  <select class="form-select" id="productCategory" required>
-                    <option value="">Select category</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="food">Food</option>
+                  <label for="productCategory" class="form-label">Categoria</label>
+                  <select class="form-select" id="productCategory" name="fk_categoria_id_cat" required>
+                    <option value="">Selecione a Categoria</option>
+                    <option value="electronics">Alimento</option>
+                    <option value="clothing">Cosmético</option>
+                    <option value="food">Higiene Pessoal</option>
+                    <option value="food">Limpeza</option>
+                    <option value="food">Vestuário</option>
                   </select>
                 </div>
+
+
                 <div class="mb-3">
-                  <label for="productImage" class="form-label">Product Image</label>
-                  <input type="file" class="form-control" id="productImage" accept="image/*" required>
+                  <label for="productImage" class="form-label">Imagem do Produto</label>
+                  <input type="file" class="form-control" id="productImage" accept="image/*" name="imagem_pro" required>
                 </div>
+
                 <div class="mb-3">
-                  <label for="productDescription" class="form-label">Description</label>
-                  <textarea class="form-control" id="productDescription" rows="4"
-                    placeholder="Enter product description"></textarea>
+                  <label for="productDescription" class="form-label">Descrição</label>
+                  <textarea class="form-control" id="productDescription" rows="4" name="descricao_pro"
+                    placeholder="Insira uma descrição para o produto"></textarea>
                 </div>
+
                 <div class="d-flex gap-2">
-                  <button type="submit" class="btn btn-primary">Add Product</button>
-                  <button type="reset" class="btn btn-secondary">Clear</button>
+                  <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+                  <button type="reset" class="btn btn-secondary">Limpar</button>
                 </div>
 
               </form>
             </div>
           </div>
-
-
         </div>
-
       </div>
-
-      <div class="row">
-        <div class="col-12">
-          <footer class="text-center py-2 mt-6 text-secondary ">
-            <p class="mb-0">Copyright © 2026 InApp Inventory Dashboard. Developed by <a href="https://codescandy.com/" target="_blank" class="text-primary">CodesCandy</a> • Distributed by <a href="https://themewagon.com/" target="_blank" class="text-primary">ThemeWagon</a> </p>
-          </footer>
-        </div>
-
-      </div>
-
     </div>
   </main>

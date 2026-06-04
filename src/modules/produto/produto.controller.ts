@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from "@nestjs/common";
+import { Body, Controller, Get, Post, Redirect, Render } from "@nestjs/common";
 import { ProdutoService } from "./produto.service";
 
 @Controller('produtos')
@@ -24,8 +24,16 @@ export class ProdutoController {
 
         return {
             titulo: 'Cadastro de Produtos',
-            rotaAtual: '/produtos/criar'
+            rotaAtual: '/produtos/criar',
+            produto: {}
        }
+    }
+
+    @Post('criar')
+    @Redirect('/produtos')
+    async criar(@Body() body: any) {
+        console.log(body);
+        await this.produtoService.create(body);
     }
 
 }
