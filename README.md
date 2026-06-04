@@ -1,4 +1,5 @@
 Aluna:Mariany Pimentel da Rocha 
+
 Projeto: Aplicação web para uma loja fictícia de produtos veganos. 
 
 Nome: Veganize
