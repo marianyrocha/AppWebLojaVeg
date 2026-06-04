@@ -3,6 +3,7 @@
 
 
 Nome: Veganize
+
 Descrição: Painel administrativo web para a gestão interna de uma loja fictícia de produtos veganos, que opera em loja física e online. Utilizado por funcionários e administradores, o sistema permitirá gerenciar produtos, categorias, marcas, fornecedores, estoque, clientes, endereços e pedidos, além de oferecer dashboard com indicadores e relatórios. O acesso é dividido em dois perfis: administrador, com controle total incluindo gestão de funcionários e cargos, e funcionário, responsável pelas operações do dia a dia.
 
 Diagrama de Caso de Uso: 
