@@ -1,5 +1,5 @@
-## Aplicação web para uma loja fictícia de produtos veganos. 
-####Mariany Pimentel da Rocha 
+## Aplicação web para uma loja fictícia de produtos veganos
+### Mariany Pimentel da Rocha 
 
 
 Nome: Veganize
