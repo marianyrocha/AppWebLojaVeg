@@ -1,10 +1,16 @@
 import { Body, Controller, Get, Post, Redirect, Render } from "@nestjs/common";
 import { ProdutoService } from "./produto.service";
+import { MarcaService } from "../marca/marca.service";
+import { CategoriaService } from "../categoria/categoria.service";
 
 @Controller('produtos')
 export class ProdutoController {
 
-    constructor(private produtoService: ProdutoService) {}
+    constructor(
+        private produtoService: ProdutoService,
+        private marcaService: MarcaService,
+        private categoriaService: CategoriaService
+    ) {}
 
     @Get()
     @Render('produto/inicial')
@@ -22,10 +28,15 @@ export class ProdutoController {
     @Render('produto/formulario')
     async formulario(): Promise<object> {
 
+        const marcas = await this.marcaService.findAll();
+        const categorias = await this.categoriaService.findAll();
+
         return {
             titulo: 'Cadastro de Produtos',
             rotaAtual: '/produtos/criar',
-            produto: {}
+            produto: {}, 
+            marcas,
+            categorias
        }
     }
 

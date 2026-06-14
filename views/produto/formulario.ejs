@@ -22,11 +22,6 @@
                     <input type="text" class="form-control" id="productName" name="nome_pro" placeholder="Digite o nome do produto" required>
                   </div>
 
-                  <div class="col-md-6 mb-3">
-                    <label for="productName" class="form-label">Marca</label>
-                    <input type="text" class="form-control" id="productName" name="fk_marca_id_mar" placeholder="Digite a marca do produto" required>
-                  </div>
-
 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Status</label>
@@ -36,33 +31,47 @@
                       <option value="Inativo">Inativo</option>
                    </select>
                   </div>
-                </div>
-                 
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="productPrice" class="form-label">Preço</label>
-                    <input type="number" class="form-control" id="productPrice" name="preco_pro" placeholder="0.00" step="0.01" required>
-                  </div>
-                  <div class="col-md-6 mb-3">
+                
+                <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Quantidade</label>
                     <input type="number" class="form-control" id="productStock" name="quantidade_pro" placeholder="0" required>
                   </div>
                 </div>
 
-                <div class="mb-3">
-                  <label for="productCategory" class="form-label">Categoria</label>
-                  <select class="form-select" id="productCategory" name="fk_categoria_id_cat" required>
-                    <option value="">Selecione a Categoria</option>
-                    <option value="electronics">Alimento</option>
-                    <option value="clothing">Cosmético</option>
-                    <option value="food">Higiene Pessoal</option>
-                    <option value="food">Limpeza</option>
-                    <option value="food">Vestuário</option>
-                  </select>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="productPrice" class="form-label">Preço</label>
+                    <input type="number" class="form-control" id="productPrice" name="preco_pro" placeholder="0.00" step="0.01" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="productStock" class="form-label">Marca</label>
+                    <select class="form-select" name="marca_pro" required>
+                      <option value="">Selecione</option>
+                      <% marcas.forEach(marca => { %>
+                          <option value="<%= marca.id_mar %>">
+                              <%= marca.nome_mar %>
+                          </option>
+                      <% }) %>
+                   </select>
+                  </div>
                 </div>
 
 
-                <div class="mb-3">
+
+                <div class="col-md-6 mb-3">
+                    <label for="productStock" class="form-label">Categoria</label>
+                    <select class="form-select" name="categoria_pro" required>
+                      <option value="">Selecione</option>
+                     <% categorias.forEach(categoria => { %>
+                          <option value="<%= categoria.id_cat %>">
+                              <%= categoria.nome_cat %>
+                          </option>
+                      <% }) %>
+                   </select>
+                  </div>
+            
+                   <div class="mb-3">
                   <label for="productImage" class="form-label">Imagem do Produto</label>
                   <input type="file" class="form-control" id="productImage" accept="image/*" name="imagem_pro" required>
                 </div>
@@ -77,11 +86,14 @@
                   <button type="submit" class="btn btn-primary">Adicionar Produto</button>
                   <button type="reset" class="btn btn-secondary">Limpar</button>
                 </div>
-
+            
+                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+</div>
+</main>
+

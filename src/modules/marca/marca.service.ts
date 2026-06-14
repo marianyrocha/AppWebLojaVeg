@@ -1,9 +1,20 @@
 import { Injectable } from "@nestjs/common";
-import { Marca } from "./marca.entity";
+import { Marcas } from "./marca.entity";
 
 @Injectable()
 export class MarcaService {     
-    async findAll(): Promise<Marca[]> {
-        return Marca.find();
+    async findAll(): Promise<Marcas[]> {
+        return Marcas.find();
     }
+
+    async create(dados: any): Promise<Marcas> {
+        const marcas = Marcas.create({
+            nome_mar: dados.nome_mar,
+            contato_mar: dados.contato_mar
+        });
+
+        return marcas.save();
+
+    }
+
 }

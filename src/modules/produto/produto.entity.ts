@@ -1,6 +1,6 @@
 
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm";
-import { Marca } from "../marca/marca.entity";
+import { Marcas } from "../marca/marca.entity";
 import { Categoria } from "../categoria/categoria.entity";
 
 @Entity('produtos')
@@ -26,11 +26,11 @@ export class Produto extends BaseEntity {
     @Column({ type: 'varchar', length: 200 })
     status_pro!: string;
 
-    @ManyToOne(() => Marca)
+    @ManyToOne(() => Marcas)
     @JoinColumn({
         name: 'fk_marca_id_mar'
     })
-    marca!: Marca;
+    marca!: Marcas;
 
     @ManyToOne(() => Categoria)
     @JoinColumn({

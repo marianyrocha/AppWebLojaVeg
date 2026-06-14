@@ -1,19 +1,27 @@
 import { Body, Controller, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
 import { CategoriaService } from "./categoria.service";
 
-@Controller('categoria')
+@Controller('categorias')
 export class categoriaController {
 
     constructor(private categoriaService: CategoriaService) {}
 
-    @Get()
-    @Render('categoria/inicial')
-    async inicial(): Promise<object> {
-        const categoria = await this.categoriaService.findAll();
+    @Get('criar')
+    @Render('categoria/formulario')
+    async formulario(): Promise<object> {
 
         return {
-            titulo: 'Consulta de Categorias',
-            categoria
-        }
+            titulo: 'Cadastro de categoria',
+            rotaAtual: '/categorias/criar',
+            categoria: {}
+       }
     }
+
+    @Post('criar')
+    @Redirect('/categorias/criar')
+    async criar(@Body() body: any) {
+        console.log(body);
+        await this.categoriaService.create(body);
+    }
+
 }

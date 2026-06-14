@@ -6,6 +6,6 @@ import { CategoriaService } from "./categoria.service";
     imports: [],
     controllers: [categoriaController],
     providers: [CategoriaService],
-    exports: []
+    exports: [CategoriaService]
 })
-export class MarcaModule {}
+export class CategoriaModule {}

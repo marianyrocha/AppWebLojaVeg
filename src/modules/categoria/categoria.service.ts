@@ -6,4 +6,15 @@ export class CategoriaService {
     async findAll(): Promise<Categoria[]> {
         return Categoria.find();
     }
+
+    async create(dados: any): Promise<Categoria> {
+        const categoria = Categoria.create({
+            nome_cat: dados.nome_cat,
+            descricao_cat: dados.descricao_cat,
+            status_cat: dados.status_cat
+        });
+
+        return categoria.save();
+
+    }
 }

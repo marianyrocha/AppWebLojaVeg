@@ -6,6 +6,6 @@ import { MarcaService } from "./marca.service";
     imports: [],
     controllers: [MarcaController],
     providers: [MarcaService],
-    exports: []
+    exports: [MarcaService]
 })
 export class MarcaModule {}
