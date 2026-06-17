@@ -3,11 +3,11 @@
         <div class="col-12">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="">
-              <h1 class="fs-3 mb-1">Inventário</h1>
-              <p class="mb-0">Controle seus produtos do inventário</p>
+              <h1 class="fs-3 mb-1">Pedidos</h1>
+              <p class="mb-0">Gerencie seus pedidos</p>
             </div>
             <div>
-              <a href="create-product.html" class="btn btn-primary">Add Product</a>
+              <a href="create-product.html" class="btn btn-primary">Adicionar Pedido</a>
             </div>
           </div>
         </div>
@@ -35,64 +35,58 @@
             <table class="table mb-0 text-nowrap table-hover">
               <thead class="table-light border-light">
                 <tr>
-                  <th>Imagem</th>
+                  <th>Data</th>
 
-                  <th>Código</th>
-                  <th>Categoria</th>
-                  <th>Marca</th>
-                  <th>Preço</th>
+                  <th>Valor</th>
+                  <th>Pagamento</th>
+                  <th>Funcionario</th>
+                  <th>Cliente</th>
                   <th>Status</th>
-                  <th>Quantidade</th>
                 </tr>
               </thead>
 
                 <tbody>
-                  <% produtos.forEach(produto => { %>
+                  <% pedidos.forEach(pedido => { %>
                     <tr class="align-middle">
+                      
+                    <td>
+                        <%= pedido.data_ped %>
+                    </td>    
 
-                     <td>
-                        <img
-                            src="/public/images/<%= produto.imagem_pro %>"
-                            alt="<%= produto.nome_pro %>"
-                            class="avatar avatar-md rounded"
-                        />
 
+ 
+                    
+                      <td>
+                        R$ <%= pedido.valor_ped %>
+                      </td>
+
+
+
+
+                      <td>
+                        <%= pedido.forma_pagamento_ped %>
+                      </td>
+
+                      <td>
+                        <%= pedido.funcionario?.nome_fun %>
+                      </td>
+
+                      <td>
+                        <%= pedido.cliente?.nome_cli %>
+                      </td>
+
+                    <td>
                         <span class="ms-3">
-                            <%= produto.nome_pro %>
+                            <%= pedido.status_ped %>
                         </span>
                     </td>
 
-
                       <td>
-                        <%= produto.id_pro %>
-                      </td>
-
-                      <td>
-                        <%= produto.categoria?.nome_cat %>
-                      </td>
-
-                      <td>
-                        <%= produto.marca?.nome_mar %>
-                      </td>
-
-                      <td>
-                        R$ <%= produto.preco_pro %>
-                      </td>
-
-                      <td>
-                        <%= produto.status_pro %>
-                      </td>
-
-                      <td>
-                        <%= produto.quantidade_pro %>
-                      </td>
-
-                      <td>
-                        <a href="/produtos/<%= produto.id_pro %>/editar">
+                        <a href="/pedidos/<%= pedido.id_ped %>/editar">
                           <i class="ti ti-edit"></i>
                         </a>
 
-                        <a href="/produtos/<%= produto.id_pro %>/excluir"
+                        <a href="/pedidos/<%= pedido.id_ped %>/excluir"
                           class="link-danger">
                           <i class="ti ti-trash ms-2"></i>
                         </a>
@@ -103,7 +97,7 @@
                 </tbody>
 
                 <tr>
-                  <td class="border-bottom-0">Mostrando produtos por página</td>
+                  <td class="border-bottom-0">Mostrando pedidos por página</td>
                   <td colspan="9" class="border-bottom-0">
                     <nav aria-label="Page navigation" class="d-flex justify-content-end">
                       <ul class="pagination mb-0">

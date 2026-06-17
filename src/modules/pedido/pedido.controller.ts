@@ -13,7 +13,7 @@ export class PedidoController {
     ) {}
 
     @Get()
-    @Render('pedidos/inicial')
+    @Render('pedido/inicial')
     async inicial(): Promise<object> {
 
         const listapedidos = await this.pedidoService.findAll();

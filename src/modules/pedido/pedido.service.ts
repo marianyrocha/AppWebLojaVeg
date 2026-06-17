@@ -8,7 +8,9 @@ import { Funcionario } from "../funcionario/funcionario.entity";
 export class PedidoService {
     
     async findAll(): Promise<Pedido[]> {
-        return Pedido.find();
+        return Pedido.find({
+            relations: ['cliente', 'funcionario']
+        }); 
     }
 
     async create(dados: any): Promise<Pedido> {

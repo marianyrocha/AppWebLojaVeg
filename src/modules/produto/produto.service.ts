@@ -8,7 +8,9 @@ import { Categoria } from "../categoria/categoria.entity";
 export class ProdutoService {
     
     async findAll(): Promise<Produto[]> {
-        return Produto.find();
+        return Produto.find({
+            relations: ['marca', 'categoria']
+        }); 
     }
 
     async create(dados: any): Promise<Produto> {

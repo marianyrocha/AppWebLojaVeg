@@ -7,8 +7,7 @@
 
     <ul class="nav flex-column">
       <li class="px-4 py-2"><small class="nav-text">Principal</small></li>
-      <li><a class="nav-link <%= rotaAtual === '/' ? 'active' : '' %>" href="/"><i class="ti ti-home"></i><span
-            class="nav-text">Home</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/' ? 'active' : '' %>" href="/"><i class="ti ti-home"></i><span class="nav-text">Home</span></a></li>
       <li><a class="nav-link <%= rotaAtual === '/produtos' ? 'active' : '' %>" href="/produtos"><i class="ti ti-box-seam"></i><span class="nav-text">Produtos</span></a></li>
       <li class="px-4 py-2"><small class="nav-text">Cadastros</small></li>
 
@@ -21,13 +20,12 @@
 
       <li class="px-4 py-2"><small class="nav-text">Pedidos</small></li>
       <li><a class="nav-link <%= rotaAtual === '/pedidos/criar' ? 'active' : '' %>" href="/pedidos/criar"><i class="ti ti-plus"></i><span class="nav-text">Novo Pedido</span></a></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Listar Pedidos</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/pedidos' ? 'active' : '' %>" href="/pedidos"><i class="ti ti-box-seam"></i><span class="nav-text">Listar Pedidos</span></a></li>
+
 
       <li class="px-4 py-2"><small class="nav-text">RH</small></li>
       <li><a class="nav-link <%= rotaAtual === '/funcionarios/criar' ? 'active' : '' %>" href="/funcionarios/criar"><i class="ti ti-plus"></i><span class="nav-text">Funcionario</span></a></li>
       <li><a class="nav-link <%= rotaAtual === '/cargos/criar' ? 'active' : '' %>" href="/cargos/criar"><i class="ti ti-plus"></i><span class="nav-text">Cargo</span></a></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-receipt"></i><span class="nav-text">Relatórios</span></a></li>
-
 
     </ul>
 
