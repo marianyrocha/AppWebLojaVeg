@@ -8,6 +8,11 @@ import { CategoriaModule } from './modules/categoria/categoria.module';
 import { MarcaModule } from './modules/marca/marca.module';
 import { Fornecedor } from './modules/fornecedor/fornecedor.entity';
 import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
+import { PedidoModule } from './modules/pedido/pedido.module';
+import { FuncionarioModule } from './modules/funcionario/funcionario.module';
+import { ClienteModule } from './modules/cliente/cliente.module';
+import { CargoModule } from './modules/cargo/cargo.module';
+import { EnderecoModule } from './modules/endereco/endereco.module';
 
 @Module({
   imports: [
@@ -17,6 +22,11 @@ import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
     MarcaModule,
     CategoriaModule,
     FornecedorModule,
+    PedidoModule, 
+    FuncionarioModule, 
+    ClienteModule, 
+    CargoModule, 
+    EnderecoModule
   ],
   controllers: [AppController],
   providers: [AppService],

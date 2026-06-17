@@ -1,0 +1,73 @@
+<div class="col-12">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+    <div class="">
+        <h1 class="fs-3 mb-1">Novo funcionario</h1>
+        <p class="mb-0">Adicione um novo funcionario</p>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body p-4">
+<form    action="/funcionarios/criar" method="POST">
+
+
+    <div class="col-md-12 mb-3">
+        <label for="funcionario" class="form-label">Nome do funcionario</label>
+        <input type="text" class="form-control" id="productName" name="nome_fun" placeholder="Digite o nome da funcionario" required>
+    </div>
+
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="productName" name="telefone_fun" placeholder="Digite o nome da funcionario" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="productName" name="email_fun" placeholder="Digite o nome da funcionario" required>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+        <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" id="productName" name="data_nascimento_fun" placeholder="Digite o nome da funcionario" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" id="productName" name="cpf_fun" placeholder="xxx.xxx.xxx-xx" required>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+        <label for="productStock" class="form-label">Cargo</label>
+        <select class="form-select" name="cargo_fun" required>
+            <option value="">Selecione</option>
+            <% cargos.forEach(cargo => { %>
+                <option value="<%= cargo.id_car %>">
+                    <%= cargo.nome_car %>
+                </option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="productStock" class="form-label">Status</label>
+        <select class="form-select" name="status_fun" required>
+            <option value="">Selecione</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+        </select>
+    </div>
+
+</div>
+
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Adicionar funcionario</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
+    </div>
+
+</form>
+</div>
+</div>
+</div>

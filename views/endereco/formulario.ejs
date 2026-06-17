@@ -1,0 +1,53 @@
+<div class="col-12">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+    <div class="">
+        <h1 class="fs-3 mb-1">Novo endereco</h1>
+        <p class="mb-0">Adicione um novo endereco</p>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body p-4">
+<form    action="/enderecos/criar" method="POST">
+
+<div class="row">
+    <div class="col-md-8 mb-3">
+        <label for="productName" class="form-label">Nome da rua</label>
+        <input type="text" class="form-control" id="productName" name="rua_end" placeholder="Digite o nome da rua" required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <label for="productName" class="form-label">CEP</label>
+        <input type="number" class="form-control" id="productName" name="cep_end" placeholder="Digite o CEP" required>
+    </div>
+
+    <div class="col-md-8 mb-3">
+        <label for="productName" class="form-label">Bairro</label>
+        <input type="text" class="form-control" id="productName" name="bairro_end" placeholder="Digite o bairro" required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <label for="productName" class="form-label">Número</label>
+        <input type="number" class="form-control" id="productName" name="numero_end" placeholder="Digite o numeral" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="productName" class="form-label">Cidade</label>
+        <input type="text" class="form-control" id="productName" name="cidade_end" placeholder="Digite o nome da cidade" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="productName" class="form-label">Estado</label>
+        <input type="text" class="form-control" id="productName" name="estado_end" placeholder="Digite o nome do estado" required>
+    </div>
+
+</div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Adicionar endereco</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
+    </div>
+
+</form>
+</div>
+</div>
+</div>

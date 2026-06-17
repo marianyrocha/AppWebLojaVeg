@@ -1,0 +1,27 @@
+import { Body, Controller, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
+import { CargoService } from "./cargo.service";
+
+@Controller('cargos')
+export class CargoController {
+
+    constructor(private cargoService: CargoService) {}
+
+    @Get('criar')
+    @Render('cargo/formulario')
+    async formulario(): Promise<object> {
+
+        return {
+            titulo: 'Cadastro de cargo',
+            rotaAtual: '/cargos/criar',
+            cargo: {}
+       }
+    }
+
+    @Post('criar')
+    @Redirect('/cargos/criar')
+    async criar(@Body() body: any) {
+        console.log(body);
+        await this.cargoService.create(body);
+    }
+
+}

@@ -16,17 +16,16 @@
       <li><a class="nav-link <%= rotaAtual === '/marcas/criar' ? 'active' : '' %>" href="/marcas/criar"><i class="ti ti-plus"></i><span class="nav-text">Marcas</span></a></li>
       <li><a class="nav-link <%= rotaAtual === '/categorias/criar' ? 'active' : '' %>" href="/categorias/criar"><i class="ti ti-plus"></i><span class="nav-text">Categorias</span></a></li>
       <li><a class="nav-link <%= rotaAtual === '/fornecedor/criar' ? 'active' : '' %>" href="/fornecedor/criar"><i class="ti ti-plus"></i><span class="nav-text">Fornecedor</span></a></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-alert-circle"></i><span class="nav-text">Categorias</span></a></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Cliente</span></a></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Fornecedores</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/clientes/criar' ? 'active' : '' %>" href="/clientes/criar"><i class="ti ti-plus"></i><span class="nav-text">Cliente</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/enderecos/criar' ? 'active' : '' %>" href="/enderecos/criar"><i class="ti ti-plus"></i><span class="nav-text">Endereço</span></a></li>
 
       <li class="px-4 py-2"><small class="nav-text">Pedidos</small></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Novo Pedido</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/pedidos/criar' ? 'active' : '' %>" href="/pedidos/criar"><i class="ti ti-plus"></i><span class="nav-text">Novo Pedido</span></a></li>
       <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Listar Pedidos</span></a></li>
 
       <li class="px-4 py-2"><small class="nav-text">RH</small></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Funcionario</span></a></li>
-      <li><a class="nav-link" href="//"><i class="ti ti-file-text"></i><span class="nav-text">Cargos</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/funcionarios/criar' ? 'active' : '' %>" href="/funcionarios/criar"><i class="ti ti-plus"></i><span class="nav-text">Funcionario</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/cargos/criar' ? 'active' : '' %>" href="/cargos/criar"><i class="ti ti-plus"></i><span class="nav-text">Cargo</span></a></li>
       <li><a class="nav-link" href="//"><i class="ti ti-receipt"></i><span class="nav-text">Relatórios</span></a></li>
 
 
