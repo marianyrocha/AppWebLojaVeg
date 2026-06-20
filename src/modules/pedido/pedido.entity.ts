@@ -1,7 +1,8 @@
 
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm";
+import { BaseEntity, OneToMany, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm";
 import { Clientes } from "../cliente/cliente.entity";
 import { Funcionario } from "../funcionario/funcionario.entity";
+import { ProdutoPedido } from "../produto-pedido/produto-pedido.entity";
 
 @Entity('pedidos')
 export class Pedido extends BaseEntity {
@@ -35,5 +36,8 @@ export class Pedido extends BaseEntity {
         name: 'fk_funcionario_id_fun'
     })
     funcionario!: Funcionario;
+
+    @OneToMany(() => ProdutoPedido, (produtoPedido) => produtoPedido.pedido)
+    produtoPedidos!: ProdutoPedido[];
 
 }

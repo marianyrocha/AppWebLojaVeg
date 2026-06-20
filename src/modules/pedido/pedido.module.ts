@@ -4,10 +4,10 @@ import { PedidoService } from "./pedido.service";
 import { ClienteModule } from "../cliente/cliente.module";
 import { FuncionarioModule } from "../funcionario/funcionario.module";
 
-
 @Module({
     imports: [ClienteModule, FuncionarioModule],
     controllers: [PedidoController],
     providers: [PedidoService],
+    exports: [PedidoService]
 })
 export class PedidoModule {}

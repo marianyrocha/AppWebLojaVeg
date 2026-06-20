@@ -9,6 +9,7 @@ import { CategoriaModule } from "../categoria/categoria.module";
     imports: [MarcaModule, CategoriaModule],
     controllers: [ProdutoController],
     providers: [ProdutoService],
+    exports: [ProdutoService]
 
 })
 export class ProdutoModule {}

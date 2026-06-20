@@ -38,6 +38,7 @@ export class PedidoController {
             pedido: {}, 
             cliente,
             funcionario
+
        }
     }
 

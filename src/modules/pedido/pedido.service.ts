@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { Pedido } from "./pedido.entity";
 import { Clientes } from "../cliente/cliente.entity";
 import { Funcionario } from "../funcionario/funcionario.entity";
+import { ProdutoPedido } from "../produto-pedido/produto-pedido.entity";
 
 
 @Injectable()
@@ -9,7 +10,7 @@ export class PedidoService {
     
     async findAll(): Promise<Pedido[]> {
         return Pedido.find({
-            relations: ['cliente', 'funcionario']
+            relations: ['cliente', 'funcionario', 'produtoPedidos', 'produtoPedidos.produto']
         }); 
     }
 
