@@ -1,0 +1,15 @@
+<h2>Excluir pedido</h2>
+
+<p>Deseja realmente excluir o pedido?</p>
+
+<p><strong><%= pedido.nome_ped %></strong></p>
+
+<form action="/pedidos/<%= pedido.id_ped %>/excluir" method="post">
+    <button type="submit" class="btn btn-danger">
+        Confirmar Exclusão
+    </button>
+
+    <a href="/pedidos" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>

@@ -15,17 +15,16 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body p-4">
-              <form action="/produtos/<%= produto.id_pro ? produto.id_pro + '/editar' : 'criar' %>" method="POST" id="addProductForm">
-                <div class="row">
+<form action="<%= produto && produto.id_pro ? '/produtos/' + produto.id_pro + '/editar' : '/produtos/criar' %>" method="post">                <div class="row">
                   <div class="col-md-14 mb-3">
                     <label for="productName" class="form-label">Nome do Produto</label>
-                    <input type="text" class="form-control" id="productName" name="nome_pro" placeholder="Digite o nome do produto" required>
+                    <input type="text" class="form-control" id="productName" name="nome_pro" value="<%= produto?.nome_pro || '' %>" placeholder="Digite o nome do produto" required>
                   </div>
 
 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Status</label>
-                    <select class="form-select" name="status_pro" required>
+                    <select class="form-select" name="status_pro" value="<%= produto?.status_pro || '' %>" required>
                       <option value="">Selecione</option>
                       <option value="Ativo">Ativo</option>
                       <option value="Inativo">Inativo</option>
@@ -34,19 +33,19 @@
                 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Quantidade</label>
-                    <input type="number" class="form-control" id="productStock" name="quantidade_pro" placeholder="0" required>
+                    <input type="number" class="form-control" id="productStock" name="quantidade_pro" value="<%= produto?.quantidade_pro || '' %>" placeholder="0" required>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="productPrice" class="form-label">Preço</label>
-                    <input type="number" class="form-control" id="productPrice" name="preco_pro" placeholder="0.00" step="0.01" required>
+                    <input type="number" class="form-control" id="productPrice" name="preco_pro" value="<%= produto?.preco_pro || '' %>" placeholder="0.00" step="0.01" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Marca</label>
-                    <select class="form-select" name="marca_pro" required>
+                    <select class="form-select" name="marca_pro" value="<%= produto?.marca_pro || '' %>" required>
                       <option value="">Selecione</option>
                       <% marcas.forEach(marca => { %>
                           <option value="<%= marca.id_mar %>">
@@ -61,7 +60,7 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Categoria</label>
-                    <select class="form-select" name="categoria_pro" required>
+                    <select class="form-select" name="categoria_pro" value="<%= produto?.categoria_pro || '' %>"  required>
                       <option value="">Selecione</option>
                      <% categorias.forEach(categoria => { %>
                           <option value="<%= categoria.id_cat %>">
@@ -73,13 +72,13 @@
             
                    <div class="mb-3">
                   <label for="productImage" class="form-label">Imagem do Produto</label>
-                  <input type="file" class="form-control" id="productImage" accept="image/*" name="imagem_pro" required>
+                  <input type="file" class="form-control" id="productImage" accept="image/*" name="imagem_pro" value="<%= produto?.imagem_pro || '' %>" required>
                 </div>
 
                 <div class="mb-3">
                   <label for="productDescription" class="form-label">Descrição</label>
                   <textarea class="form-control" id="productDescription" rows="4" name="descricao_pro"
-                    placeholder="Insira uma descrição para o produto"></textarea>
+                   value="<%= produto?.descricao_pro || '' %>"  placeholder="Insira uma descrição para o produto"></textarea>
                 </div>
 
                 <div class="d-flex gap-2">

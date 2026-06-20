@@ -13,6 +13,15 @@ export class PedidoService {
         }); 
     }
 
+     async findOne(id: number): Promise<Pedido | null> {
+        return Pedido.findOne({
+            where: {
+                id_ped: id
+            },
+            relations: ['cliente', 'funcionario']
+        });
+    }
+
     async create(dados: any): Promise<Pedido> {
         const pedido = Pedido.create({ 
         data_ped: dados.data_ped,
@@ -34,5 +43,23 @@ export class PedidoService {
         return pedido.save();
     }
 
-}
+    async update(id: number, dados: any) {
+    
+            await Pedido.update({ id_ped: id }, {
+                data_ped: dados.data_ped,
+                status_ped: dados.status_ped,
+                valor_ped: dados.valor_ped,
+                forma_pagamento_ped: dados.forma_pagamento_ped,
+                canal_ped: dados.canal_ped,
 
+        });
+    
+        };
+    
+        async delete(id: number) {
+        await Pedido.delete({
+            id_ped: id
+        });
+    }
+
+}

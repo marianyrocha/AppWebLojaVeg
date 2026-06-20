@@ -13,6 +13,15 @@ export class ProdutoService {
         }); 
     }
 
+    async findOne(id: number): Promise<Produto | null> {
+    return Produto.findOne({
+        where: {
+            id_pro: id
+        },
+        relations: ['marca', 'categoria']
+    });
+}
+
     async create(dados: any): Promise<Produto> {
         const produto = Produto.create({ 
         nome_pro: dados.nome_pro,
@@ -32,7 +41,26 @@ export class ProdutoService {
         });
 
         return produto.save();
-    }
+    };
+
+    async update(id: number, dados: any) {
+
+        await Produto.update({ id_pro: id }, {
+            nome_pro: dados.nome_pro,
+            descricao_pro: dados.descricao_pro,
+            preco_pro: dados.preco_pro,
+            quantidade_pro: dados.quantidade_pro,
+            status_pro: dados.status_pro,
+            imagem_pro: dados.imagem_pro
+    });
+
+    };
+
+    async delete(id: number) {
+    await Produto.delete({
+        id_pro: id
+    });
+}
 
 }
 

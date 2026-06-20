@@ -33,7 +33,18 @@ export class AppController {
   @Get('login')
   @Render('autenticacao/login')
   login(): object {
-    return { layout: false };
-    rotaAtual: '/login'
+    return {
+      layout: false,
+      rotaAtual: '/login'
+    };
+  }
+
+  @Get('registro')
+  @Render('registro')
+  registro() {
+  return {
+    titulo: 'Página de registro',
+    rotaAtual: '/registro'
+  };
   }
 }

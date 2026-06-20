@@ -15,13 +15,13 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body p-4">
-              <form action="/pedidos/<%= pedido.id_ped ? pedido.id_ped + '/editar' : 'criar' %>" method="POST" id="addProductForm">
+<form action="<%= pedido && pedido.id_ped ? '/pedidos/' + pedido.id_ped + '/editar' : '/pedidos/criar' %>" method="post">                <div class="row">
                 
                 
               <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Status</label>
-                    <select class="form-select" name="status_ped" required>
+                    <select class="form-select" name="status_ped" value="<%= pedido?.status_ped || '' %>" required>
                       <option value="">Selecione</option>
                       <option value="Pago">Pago</option>
                       <option value="Aguardando Pagamento">Aguardando Pagamento</option>
@@ -30,7 +30,7 @@
                 
                 <div class="col-md-6 mb-3">
                       <label for="productName" class="form-label">Forma de Pagamento</label>
-                      <select class="form-select" name="forma_pagamento_ped" required>
+                      <select class="form-select" name="forma_pagamento_ped" value="<%= pedido?.forma_pagamento_ped || '' %>" required>
                         <option value="">Selecione</option>
                         <option value="Dinheiro">Dinheiro</option>
                         <option value="Pix">Pix</option>
@@ -41,18 +41,18 @@
 
                 <div class="col-md-6 mb-3">
                   <label for="productPrice" class="form-label">Valor</label>
-                  <input type="number" class="form-control" id="productPrice" name="valor_ped" placeholder="0.00" step="0.01" required>
+                  <input type="number" class="form-control" id="productPrice" name="valor_ped" value="<%= pedido?.valor_ped || '' %>" placeholder="0.00" step="0.01" required>
                 </div>
 
                   <div class="col-md-6 mb-3">
                       <label for="productName" class="form-label">Data</label>
-                      <input type="date" class="form-control" id="productName" name="data_ped" placeholder="Digite o nome da categoria" required>
+                      <input type="date" class="form-control" id="productName" name="data_ped" value="<%= pedido?.data_ped || '' %>" placeholder="Digite o nome da categoria" required>
                   </div>
   
 
                   <div class="col-md-6 mb-3">
                       <label for="productName" class="form-label">Canal</label>
-                      <select class="form-select" name="canal_ped" required>
+                      <select class="form-select" name="canal_ped" value="<%= pedido?.canal_ped || '' %>" required>
                         <option value="">Selecione</option>
                         <option value="Loja Física">Loja Física</option>
                         <option value="Loja Virtual">Loja Virtual</option>
@@ -62,11 +62,11 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Cliente</label>
-                    <select class="form-select" name="cliente_ped" required>
+                    <select class="form-select" name="cliente_ped" value="<%= pedido?.cliente_ped || '' %>" required>
                       <option value="">Selecione</option>
-                      <% clientes.forEach(clientes => { %>
-                          <option value="<%= clientes.id_cli %>">
-                              <%= clientes.nome_cli %>
+                      <% cliente.forEach(cliente => { %>
+                          <option value="<%= cliente.id_cli %>">
+                              <%= cliente.nome_cli %>
                           </option>
                       <% }) %>
                    </select>
@@ -74,10 +74,10 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="productStock" class="form-label">Funcionario</label>
-                    <select class="form-select" name="funcionario_ped" required>
+                    <select class="form-select" name="funcionario_ped" value="<%= pedido?.funcionario_ped || '' %>" required>
                     <option value="">Selecione</option>
 
-                    <% funcionarios.forEach(funcionario => { %>
+                    <% funcionario.forEach(funcionario => { %>
                         <option value="<%= funcionario.id_fun %>">
                             <%= funcionario.nome_fun %>
                         </option>
