@@ -15,11 +15,13 @@ import { CargoModule } from './modules/cargo/cargo.module';
 import { EnderecoModule } from './modules/endereco/endereco.module';
 import { ProdutoPedidoModule } from './modules/produto-pedido/produto-pedido.module';
 import { ProdutoFornecedorModule } from './modules/produto-fornecedor/produto-fornecedor.module';
+import { HomeModule } from './modules/home/home.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
+    HomeModule,
     ProdutoPedidoModule,
     ProdutoFornecedorModule,
     ProdutoModule,
@@ -30,7 +32,8 @@ import { ProdutoFornecedorModule } from './modules/produto-fornecedor/produto-fo
     FuncionarioModule, 
     ClienteModule, 
     CargoModule, 
-    EnderecoModule    
+    EnderecoModule
+       
   ],
   controllers: [AppController],
   providers: [AppService],
