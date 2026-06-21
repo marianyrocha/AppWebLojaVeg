@@ -18,7 +18,7 @@ export class CargoController {
     }
 
     @Post('criar')
-    @Redirect('/cargos/criar')
+    @Redirect('/funcionarios/criar')
     async criar(@Body() body: any) {
         console.log(body);
         await this.cargoService.create(body);

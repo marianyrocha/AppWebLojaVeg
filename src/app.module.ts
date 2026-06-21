@@ -14,11 +14,14 @@ import { ClienteModule } from './modules/cliente/cliente.module';
 import { CargoModule } from './modules/cargo/cargo.module';
 import { EnderecoModule } from './modules/endereco/endereco.module';
 import { ProdutoPedidoModule } from './modules/produto-pedido/produto-pedido.module';
+import { ProdutoFornecedorModule } from './modules/produto-fornecedor/produto-fornecedor.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
     ProdutoPedidoModule,
+    ProdutoFornecedorModule,
     ProdutoModule,
     MarcaModule,
     CategoriaModule,

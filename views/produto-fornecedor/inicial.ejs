@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="fs-3 mb-1">Catálogo de Fornecedores</h1>
+        <p class="mb-0">Gerencie produtos e preços de custo por fornecedor</p>
+      </div>
+      <div>
+        <a href="/produto-fornecedor/criar" class="btn btn-primary">Vincular Produto</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card table-responsive">
+      <table class="table mb-0 text-nowrap table-hover">
+        <thead class="table-light border-light">
+          <tr>
+            <th>Fornecedor</th>
+            <th>Produto</th>
+            <th>Qtd. Mínima</th>
+            <th>Preço Custo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% itens.forEach(item => { %>
+            <tr class="align-middle">
+              <td class="text-left"><%= item.fornecedor?.nome_for || 'Fornecedor não encontrado' %></td>
+              <td><%= item.produto?.nome_pro || 'Produto não encontrado' %></td>
+              <td class="text-left"><%= item.quantidade_pro_for %></td>
+              <td class="text-left">R$ <%= Number(item.preco_unitario_pro_for).toFixed(2).replace('.', ',') %></td>
+             
+
+
+              <td>
+                <a href="/produto-fornecedor/<%= item.id_pro_for %>/editar" class="text-secondary me-2" title="Editar">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a href="/produto-fornecedor/<%= item.id_pro_for %>/excluir" class="text-danger" title="Excluir">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

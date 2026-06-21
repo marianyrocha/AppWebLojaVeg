@@ -18,7 +18,7 @@ export class EnderecoController {
     }
 
     @Post('criar')
-    @Redirect('/enderecos/criar')
+    @Redirect('/clientes/criar')
     async criar(@Body() body: any) {
         console.log(body);
         await this.enderecoService.create(body);

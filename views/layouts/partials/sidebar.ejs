@@ -8,24 +8,23 @@
     <ul class="nav flex-column">
       <li class="px-4 py-2"><small class="nav-text">Principal</small></li>
       <li><a class="nav-link <%= rotaAtual === '/' ? 'active' : '' %>" href="/"><i class="ti ti-home"></i><span class="nav-text">Home</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/produtos' ? 'active' : '' %>" href="/produtos"><i class="ti ti-box-seam"></i><span class="nav-text">Produtos</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/produtos' ? 'active' : '' %>" href="/produtos"><i class="ti ti-box-seam"></i><span class="nav-text">Todos os Produtos</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/pedidos' ? 'active' : '' %>" href="/pedidos"><i class="ti ti-box-seam"></i><span class="nav-text">Todos os Pedidos</span></a></li>
       <li class="px-4 py-2"><small class="nav-text">Cadastros</small></li>
 
       <li><a class="nav-link <%= rotaAtual === '/produtos/criar' ? 'active' : '' %>" href="/produtos/criar"><i class="ti ti-plus"></i><span class="nav-text">Produto</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/marcas/criar' ? 'active' : '' %>" href="/marcas/criar"><i class="ti ti-plus"></i><span class="nav-text">Marcas</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/categorias/criar' ? 'active' : '' %>" href="/categorias/criar"><i class="ti ti-plus"></i><span class="nav-text">Categorias</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/fornecedor/criar' ? 'active' : '' %>" href="/fornecedor/criar"><i class="ti ti-plus"></i><span class="nav-text">Fornecedor</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/pedidos/criar' ? 'active' : '' %>" href="/pedidos/criar"><i class="ti ti-plus"></i><span class="nav-text">Pedido</span></a></li>
       <li><a class="nav-link <%= rotaAtual === '/clientes/criar' ? 'active' : '' %>" href="/clientes/criar"><i class="ti ti-plus"></i><span class="nav-text">Cliente</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/enderecos/criar' ? 'active' : '' %>" href="/enderecos/criar"><i class="ti ti-plus"></i><span class="nav-text">Endereço</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/funcionarios/criar' ? 'active' : '' %>" href="/funcionarios/criar"><i class="ti ti-plus"></i><span class="nav-text">Funcionario</span></a></li>
 
       <li class="px-4 py-2"><small class="nav-text">Pedidos</small></li>
-      <li><a class="nav-link <%= rotaAtual === '/pedidos/criar' ? 'active' : '' %>" href="/pedidos/criar"><i class="ti ti-plus"></i><span class="nav-text">Novo Pedido</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/pedidos' ? 'active' : '' %>" href="/pedidos"><i class="ti ti-box-seam"></i><span class="nav-text">Listar Pedidos</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/produto-fornecedor' ? 'active' : '' %>" href="/produto-fornecedor"><i class="ti ti-box-seam"></i><span class="nav-text">Catálogo</span></a></li>
+      <li><a class="nav-link <%= rotaAtual === '/produto-fornecedor/criar' ? 'active' : '' %>" href="/produto-fornecedor/criar"><i class="ti ti-box-seam"></i><span class="nav-text">Vincular Produtos</span></a></li>
 
-      <li class="px-4 py-2"><small class="nav-text">RH</small></li>
-      <li><a class="nav-link <%= rotaAtual === '/funcionarios/criar' ? 'active' : '' %>" href="/funcionarios/criar"><i class="ti ti-plus"></i><span class="nav-text">Funcionario</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/cargos/criar' ? 'active' : '' %>" href="/cargos/criar"><i class="ti ti-plus"></i><span class="nav-text">Cargo</span></a></li>
+      <li class="px-4 py-2"><small class="nav-text">Conta</small></li>
+      <li><a class="nav-link <%= rotaAtual === '/produto-fornecedor' ? 'active' : '' %>" href="/produto-fornecedor"><i class="ti ti-box-seam"></i><span class="nav-text">Sair</span></a></li>
 
+     
     </ul>
 
   </aside>

@@ -18,7 +18,7 @@ export class FornecedorController {
     }
 f
     @Post('criar')
-    @Redirect('/fornecedor/criar')
+    @Redirect('/produto-fornecedor/criar')
     async criar(@Body() body: any) {
         console.log(body);
         await this.fornecedorService.create(body);

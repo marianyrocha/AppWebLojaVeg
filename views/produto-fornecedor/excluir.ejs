@@ -1,0 +1,18 @@
+<h2>Excluir Vínculo de Fornecedor</h2>
+
+<p>Deseja realmente excluir este vínculo de fornecimento?</p>
+
+<p>
+    <strong>Produto:</strong> <%= item.produto?.nome_pro %><br>
+    <strong>Fornecedor:</strong> <%= item.fornecedor?.nome_for %>
+</p>
+
+<form action="/produto-fornecedor/<%= item.id_pro_for %>/excluir" method="post">
+    <button type="submit" class="btn btn-danger">
+        Confirmar Exclusão
+    </button>
+
+    <a href="/produto-fornecedor" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>
