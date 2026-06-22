@@ -16,6 +16,8 @@ import { EnderecoModule } from './modules/endereco/endereco.module';
 import { ProdutoPedidoModule } from './modules/produto-pedido/produto-pedido.module';
 import { ProdutoFornecedorModule } from './modules/produto-fornecedor/produto-fornecedor.module';
 import { HomeModule } from './modules/home/home.module';
+import { AutenticacaoModule } from './modules/autenticacao/autenticacao.module';
+
 
 @Module({
   imports: [
@@ -32,8 +34,8 @@ import { HomeModule } from './modules/home/home.module';
     FuncionarioModule, 
     ClienteModule, 
     CargoModule, 
-    EnderecoModule
-       
+    EnderecoModule,
+    AutenticacaoModule
   ],
   controllers: [AppController],
   providers: [AppService],

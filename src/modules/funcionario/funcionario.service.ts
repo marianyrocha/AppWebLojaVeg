@@ -12,6 +12,7 @@ export class FuncionarioService {
         const funcionario = Funcionario.create({
             nome_fun: dados.nome_fun,
             email_fun: dados.email_fun,
+            senha_fun: dados.senha_fun,
             cpf_fun: dados.cpf_fun,
             telefone_fun: dados.telefone_fun,
             data_nascimento_fun: dados.data_nascimento_fun,

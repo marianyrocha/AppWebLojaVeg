@@ -1,11 +1,13 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, UseGuards, Render } from '@nestjs/common';
 import { ProdutoService } from '../produto/produto.service';
 import { PedidoService } from '../pedido/pedido.service';
 import { ClienteService } from '../cliente/cliente.service';
 import { FornecedorService } from '../fornecedor/fornecedor.service';
 import { Produto } from '../produto/produto.entity';
 import { LessThan } from 'typeorm';
+import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
 
+@UseGuards(AutenticacaoGuard)
 @Controller()
 export class HomeController {
 
@@ -68,6 +70,8 @@ export class HomeController {
             ultimosPedidos
 
         };
+
+        
 }
       
 }

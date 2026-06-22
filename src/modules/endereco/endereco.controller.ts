@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
+import { Body, Controller, Get, UseGuards, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
 import { EnderecoService } from "./endereco.service";
+import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
 
+@UseGuards(AutenticacaoGuard)
 @Controller('enderecos')
 export class EnderecoController {
 

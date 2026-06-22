@@ -14,6 +14,9 @@ export class Funcionario extends BaseEntity {
     email_fun!: string;
 
     @Column({ type: 'varchar', length: 100 })
+    senha_fun!: string;
+
+    @Column({ type: 'varchar', length: 100 })
     cpf_fun!: string;
 
     @Column({ type: 'varchar', length: 100 })

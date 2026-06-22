@@ -1,3 +1,6 @@
+
+
+console.log('Sidebar carregado');
 const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');
     const topbar = document.getElementById('topbar');

@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post, Param, Redirect, Render, Query } from "@nestjs/common";
+import { Body, Controller, Get, UseGuards, Post, Param, Redirect, Render, Query } from "@nestjs/common";
 import { ProdutoPedidoService } from "./produto-pedido.service";
 import { PedidoService } from "../pedido/pedido.service";
 import { ProdutoService } from "../produto/produto.service";
+import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
 
+@UseGuards(AutenticacaoGuard)
 @Controller('produto-pedido')
 export class ProdutoPedidoController {
 

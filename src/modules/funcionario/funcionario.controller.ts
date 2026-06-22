@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
+import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
 import { FuncionarioService } from "./funcionario.service";
 import { CargoService } from "../cargo/cargo.service";
+import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
 
+@UseGuards(AutenticacaoGuard)
 @Controller('funcionarios')
 export class FuncionarioController {
 
