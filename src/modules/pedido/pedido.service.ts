@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
+import { Like } from "typeorm";
 import { Pedido } from "./pedido.entity";
 import { Clientes } from "../cliente/cliente.entity";
 import { Funcionario } from "../funcionario/funcionario.entity";
-import { ProdutoPedido } from "../produto-pedido/produto-pedido.entity";
-
 
 @Injectable()
 export class PedidoService {
@@ -14,7 +13,19 @@ export class PedidoService {
         }); 
     }
 
-     async findOne(id: number): Promise<Pedido | null> {
+    async buscar(termo: string): Promise<Pedido[]> {
+        return Pedido.find({
+            where: [
+            { status_ped: Like(`%${termo}%`) },
+            { cliente: { nome_cli: Like(`%${termo}%`) } },
+            { funcionario: { nome_fun: Like(`%${termo}%`) } }
+        ],
+
+        relations: ['cliente', 'funcionario', 'produtoPedidos', 'produtoPedidos.produto']
+        });
+    }
+
+    async findOne(id: number): Promise<Pedido | null> {
         return Pedido.findOne({
             where: {
                 id_ped: id
@@ -25,42 +36,35 @@ export class PedidoService {
 
     async create(dados: any): Promise<Pedido> {
         const pedido = Pedido.create({ 
-        data_ped: dados.data_ped,
-        status_ped: dados.status_ped,
-        valor_ped: dados.valor_ped,
-        forma_pagamento_ped: dados.forma_pagamento_ped,
-        canal_ped: dados.canal_ped,
-
-        cliente: {
-            id_cli: Number(dados.cliente_ped)
-        } as Clientes,
-
-        funcionario: {
-            id_fun: Number(dados.funcionario_ped)
-        } as Funcionario 
-
+            data_ped: dados.data_ped,
+            status_ped: dados.status_ped,
+            valor_ped: dados.valor_ped,
+            forma_pagamento_ped: dados.forma_pagamento_ped,
+            canal_ped: dados.canal_ped,
+            cliente: {
+                id_cli: Number(dados.cliente_ped)
+            } as Clientes,
+            funcionario: {
+                id_fun: Number(dados.funcionario_ped)
+            } as Funcionario 
         });
 
         return pedido.save();
     }
 
     async update(id: number, dados: any) {
-    
-            await Pedido.update({ id_ped: id }, {
-                data_ped: dados.data_ped,
-                status_ped: dados.status_ped,
-                valor_ped: dados.valor_ped,
-                forma_pagamento_ped: dados.forma_pagamento_ped,
-                canal_ped: dados.canal_ped,
-
+        await Pedido.update({ id_ped: id }, {
+            data_ped: dados.data_ped,
+            status_ped: dados.status_ped,
+            valor_ped: dados.valor_ped,
+            forma_pagamento_ped: dados.forma_pagamento_ped,
+            canal_ped: dados.canal_ped,
         });
+    }
     
-        };
-    
-        async delete(id: number) {
+    async delete(id: number) {
         await Pedido.delete({
             id_ped: id
         });
     }
-
 }
