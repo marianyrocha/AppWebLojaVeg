@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { ProdutoPedido } from "./produto-pedido.entity";
 import { Pedido } from "../pedido/pedido.entity";
 import { Produto } from "../produto/produto.entity";
+import { CreateProdutoPedidoDto } from "./dtos/create-produto-pedido.dto";
+import { UpdateProdutoPedidoDto } from "./dtos/update-produto-pedido.dto";
 
 @Injectable()
 export class ProdutoPedidoService {
@@ -31,28 +33,28 @@ export class ProdutoPedidoService {
         });
     }
 
-    async create(dados: any): Promise<ProdutoPedido> {
+    async create(dados: CreateProdutoPedidoDto): Promise<ProdutoPedido> {
         const produtoPedido = ProdutoPedido.create({
             quantidade_pro_ped: dados.quantidade_pro_ped,
             preco_unitario_pro_ped: dados.preco_unitario_pro_ped,
             pedido: {
-                id_ped: Number(dados.pedido_id)
+                id_ped: Number(dados.pedido_ped)
             } as Pedido,
             produto: {
-                id_pro: Number(dados.produto_id)
+                id_pro: Number(dados.produto_pro)
             } as Produto
         });
 
         const itemSalvo = await produtoPedido.save();
 
-        if (dados.pedido_id) {
-            await this.atualizarValorTotalPedido(Number(dados.pedido_id));
+        if (dados.pedido_ped) {
+            await this.atualizarValorTotalPedido(Number(dados.pedido_ped));
         }
 
         return itemSalvo;
     }
 
-    async update(id: number, dados: any) {
+    async update(id: number, dados: UpdateProdutoPedidoDto) {
         await ProdutoPedido.update(
             { id_pro_ped: id },
             {

@@ -3,6 +3,8 @@ import { ProdutoPedidoService } from "./produto-pedido.service";
 import { PedidoService } from "../pedido/pedido.service";
 import { ProdutoService } from "../produto/produto.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateProdutoPedidoDto } from "./dtos/create-produto-pedido.dto";
+import { UpdateProdutoPedidoDto } from "./dtos/update-produto-pedido.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('produto-pedido')
@@ -43,8 +45,8 @@ export class ProdutoPedidoController {
 
     @Post('criar')
     @Redirect('/pedidos')
-    async criar(@Body() body: any) {
-        await this.produtoPedidoService.create(body);
+    async criar(@Body() dados: CreateProdutoPedidoDto) {
+        await this.produtoPedidoService.create(dados);
     }
 
     @Get(':id/editar')
@@ -68,9 +70,9 @@ export class ProdutoPedidoController {
     @Redirect('/pedidos')
     async atualizar(
         @Param('id') id: string,
-        @Body() body: any
+        @Body() dados: UpdateProdutoPedidoDto
     ) {
-        await this.produtoPedidoService.update(Number(id), body);
+        await this.produtoPedidoService.update(Number(id), dados);
     }
 
     @Get(':id/excluir')

@@ -1,6 +1,7 @@
 import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
 import { FornecedorService } from "./fornecedor.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateFornecedorDto } from "./dtos/create-fornecedor.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('fornecedor')
@@ -20,10 +21,8 @@ export class FornecedorController {
     }
 f
     @Post('criar')
-    @Redirect('/produto-fornecedor/criar')
-    async criar(@Body() body: any) {
-        console.log(body);
-        await this.fornecedorService.create(body);
+    @Redirect('/fornecedor/criar')
+        async criar(@Body() dados: CreateFornecedorDto) { 
+        await this.fornecedorService.create(dados);
     }
-
 }

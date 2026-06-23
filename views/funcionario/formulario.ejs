@@ -1,7 +1,7 @@
 <div class="col-12">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
     <div class="">
-        <h1 class="fs-3 mb-1">Novo funcionario</h1>
+        <h1 class="fs-3 mb-1">Novo Funcionario</h1>
         <p class="mb-0">Adicione um novo funcionario</p>
     </div>
     <div>
@@ -15,13 +15,14 @@
 <form    action="/funcionarios/criar" method="POST">
 
 
-    <div class="col-md-12 mb-3">
+
+
+<div class="row">
+    <div class="col-md-6 mb-3">
         <label for="funcionario" class="form-label">Nome do funcionario</label>
         <input type="text" class="form-control" id="productName" name="nome_fun" placeholder="Digite o nome da funcionario" required>
     </div>
 
-
-<div class="row">
 
     <div class="col-md-6 mb-3">
         <label for="telefone" class="form-label">Telefone</label>
@@ -31,6 +32,11 @@
     <div class="col-md-6 mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="text" class="form-control" id="productName" name="email_fun" placeholder="Digite o nome da funcionario" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+    <label for="senha" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="senha" name="senha_fun" placeholder="Digite uma senha" required>
     </div>
     
     <div class="col-md-6 mb-3">

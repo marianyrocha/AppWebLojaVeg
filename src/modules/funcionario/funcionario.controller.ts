@@ -2,6 +2,7 @@ import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, HttpCo
 import { FuncionarioService } from "./funcionario.service";
 import { CargoService } from "../cargo/cargo.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateFuncionarioDto } from "./dtos/create-funcionario.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('funcionarios')
@@ -28,9 +29,8 @@ export class FuncionarioController {
 
     @Post('criar')
     @Redirect('/funcionarios/criar')
-    async criar(@Body() body: any) {
-        console.log(body);
-        await this.funcionarioService.create(body);
+        async criar(@Body() dados: CreateFuncionarioDto) { 
+        await this.funcionarioService.create(dados);
     }
 
 }

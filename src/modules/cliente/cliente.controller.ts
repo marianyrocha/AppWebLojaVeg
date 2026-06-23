@@ -2,6 +2,7 @@ import { Body,Controller, UseGuards, Get, Post, Redirect, Render, Param, HttpCod
 import { ClienteService } from "./cliente.service";
 import { EnderecoService } from "../endereco/endereco.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateClienteDto } from "./dtos/create-cliente.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('clientes')
@@ -28,9 +29,8 @@ export class ClienteController {
 
     @Post('criar')
     @Redirect('/clientes/criar')
-    async criar(@Body() body: any) {
-        console.log(body);
-        await this.clienteService.create(body);
-    }
+    async criar(@Body() dados: CreateClienteDto) { 
+    await this.clienteService.create(dados);
+}
 
 }

@@ -3,6 +3,8 @@ import { ProdutoFornecedorService } from "./produto-fornecedor.service";
 import { FornecedorService } from "../fornecedor/fornecedor.service";
 import { ProdutoService } from "../produto/produto.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateProdutoFornecedorDto } from "./dtos/create-produto-fornecedor.dto";
+import { UpdateProdutoDtoFornecedorDto } from "./dtos/update-produto-fornecedor.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('produto-fornecedor')
@@ -42,15 +44,8 @@ export class ProdutoFornecedorController {
 
     @Post('criar')
     @Redirect('/produto-fornecedor')
-    async criar(@Body() body: any) {
-        const dadosFormatados = {
-            quantidade_pro_for: Number(body.quantidade_pro_for),
-            preco_unitario_pro_for: Number(body.preco_unitario_pro_for),
-            produto: { id_pro: Number(body.produto_id) },
-            fornecedor: { id_for: Number(body.fornecedor_id) }
-        };
-
-        await this.produtoFornecedorService.create(dadosFormatados);
+    async criar(@Body() dados: CreateProdutoFornecedorDto) {
+        await this.produtoFornecedorService.create(dados);
     }
 
     @Get(':id/editar')
@@ -71,8 +66,8 @@ export class ProdutoFornecedorController {
 
     @Post(':id/editar')
     @Redirect('/produto-fornecedor')
-    async atualizar(@Param('id') id: string, @Body() body: any) {
-        await this.produtoFornecedorService.update(Number(id), body);
+    async atualizar(@Param('id') id: number, @Body() dados: UpdateProdutoDtoFornecedorDto) {
+        await this.produtoFornecedorService.update(Number(id), dados);
     }
 
     @Get(':id/excluir')

@@ -18,7 +18,10 @@
       <div class="card-body p-4">
         <form action="<%= item?.id_pro_for ? '/produto-fornecedor/' + item.id_pro_for + '/editar' : '/produto-fornecedor/criar' %>" method="POST">
 
-          <div class="mb-3">
+         <div class="row">
+       
+            <div class="col-md-6">
+            <div class="mb-3">
             <label class="form-label">Produto</label>
             <select class="form-select" name="produto_id" required>
               <option value="">Selecione um produto</option>
@@ -29,7 +32,9 @@
               <% }) %>
             </select>
           </div>
-
+          </div>
+        
+          <div class="col-md-6">
           <div class="mb-3">
             <label class="form-label">Fornecedor</label>
             <select class="form-select" name="fornecedor_id" required>
@@ -41,16 +46,23 @@
               <% }) %>
             </select>
           </div>
+          </div>
 
+          <div class="col-md-6">
           <div class="mb-3">
             <label class="form-label">Quantidade</label>
             <input type="number" class="form-control" name="quantidade_pro_for" value="<%= item?.quantidade_pro_for || '' %>" required>
           </div>
+          </div>
 
+         <div class="col-md-6">
           <div class="mb-3">
             <label class="form-label">Preço Unitário</label>
             <input type="number" step="0.01" class="form-control" name="preco_unitario_pro_for" value="<%= item?.preco_unitario_pro_for || '' %>" required>
           </div>
+          </div>
+        
+        </div>
 
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary">Salvar</button>

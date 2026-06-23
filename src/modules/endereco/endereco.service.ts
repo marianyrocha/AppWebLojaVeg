@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Endereco } from "./endereco.entity";
+import { CreateEnderecoDto } from "./dtos/create-endereco.dto";
 
 @Injectable()
 export class EnderecoService {     
@@ -7,7 +8,7 @@ export class EnderecoService {
         return Endereco.find();
     }
 
-    async create(dados: any): Promise<Endereco> {
+    async create(dados: CreateEnderecoDto): Promise<Endereco> {
         const endereco = Endereco.create({
             rua_end: dados.rua_end,
             bairro_end: dados.bairro_end,

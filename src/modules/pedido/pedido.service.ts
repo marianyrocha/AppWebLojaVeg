@@ -3,6 +3,9 @@ import { Like } from "typeorm";
 import { Pedido } from "./pedido.entity";
 import { Clientes } from "../cliente/cliente.entity";
 import { Funcionario } from "../funcionario/funcionario.entity";
+import { CreatePedidoDto } from "./dtos/create-pedido.dto";
+import { UpdateProdutoPedidoDto } from "../produto-pedido/dtos/update-produto-pedido.dto";
+import { UpdatePedidoDto } from "./dtos/update-pedido.dto";
 
 @Injectable()
 export class PedidoService {
@@ -34,7 +37,7 @@ export class PedidoService {
         });
     }
 
-    async create(dados: any): Promise<Pedido> {
+    async create(dados: CreatePedidoDto): Promise<Pedido> {
         const pedido = Pedido.create({ 
             data_ped: dados.data_ped,
             status_ped: dados.status_ped,
@@ -52,7 +55,7 @@ export class PedidoService {
         return pedido.save();
     }
 
-    async update(id: number, dados: any) {
+    async update(id: number, dados: UpdatePedidoDto) {
         await Pedido.update({ id_ped: id }, {
             data_ped: dados.data_ped,
             status_ped: dados.status_ped,

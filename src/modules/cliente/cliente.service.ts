@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { Clientes } from "./cliente.entity";
 import { Endereco } from "../endereco/endereco.entity";
+import { CreateEnderecoDto } from "../endereco/dtos/create-endereco.dto";
+import { CreateClienteDto } from "./dtos/create-cliente.dto";
 
 @Injectable()
 export class ClienteService {     
@@ -8,7 +10,7 @@ export class ClienteService {
         return Clientes.find();
     }
 
-    async create(dados: any): Promise<Clientes> {
+    async create(dados: CreateClienteDto): Promise<Clientes> {
         const clientes = Clientes.create({
             nome_cli: dados.nome_cli,
             telefone_cli: dados.telefone_cli,

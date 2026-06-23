@@ -1,15 +1,64 @@
-<h2>Excluir pedido</h2>
+<% pedido = locals.pedido || {} %>
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+            <h4><%= locals.titulo %></h4>
+            <p class="mb-0">&raquo; Gerenciamento de Pedidos</p>
+        </div>
+    </div>
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicial</a></li>
+            <li class="breadcrumb-item"><a href="/pedidos">Consulta de Pedidos</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Excluir Pedido</a></li>
+        </ol>
+    </div>
+</div>
 
-<p>Deseja realmente excluir o pedido?</p>
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <div class="card border-danger">
+            <div class="card-header bg-danger p-3">
+                <h4 class="card-title text-white mb-0">Exclusão de pedido</h4>
+            </div>
 
-<p><strong><%= pedido.nome_ped %></strong></p>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <b>Esta ação excluirá o registro de forma permanente.</b>
+                </div>
 
-<form action="/pedidos/<%= pedido.id_ped %>/excluir" method="post">
-    <button type="submit" class="btn btn-danger">
-        Confirmar Exclusão
-    </button>
+                <p class="mb-4">
+                    Tem certeza que deseja excluir o pedido abaixo?
+                </p>
 
-    <a href="/pedidos" class="btn btn-secondary">
-        Cancelar
-    </a>
-</form>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered mb-0">
+                        <tbody>
+                            <tr>
+                                <th>ID do Pedido</th>
+                                <td>#<%= pedido.id_ped %></td>
+                            </tr>
+                            <tr>
+                                <th>Data</th>
+                                <td><%= new Date(pedido.data_ped).toLocaleDateString('pt-BR') %></td>
+                            </tr>
+                            <tr>
+                                <th>Valor</th>
+                                <td>R$ <%= Number(pedido.valor_ped).toFixed(2).replace('.', ',') %></td>
+                            </tr>
+                            <tr>
+                                <th>Cliente</th>
+                                <td><%= pedido.cliente?.nome_cli || 'Não informado' %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <form action="/pedidos/<%= pedido.id_ped %>/excluir" method="post">
+                    <button type="submit" class="btn btn-danger mr-2">Confirmar Exclusão</button>
+                    <a href="/pedidos" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
 import { CargoService } from "./cargo.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateCargoDto } from "./dtos/create-cargo.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('cargos')
@@ -20,10 +21,8 @@ export class CargoController {
     }
 
     @Post('criar')
-    @Redirect('/funcionarios/criar')
-    async criar(@Body() body: any) {
-        console.log(body);
-        await this.cargoService.create(body);
+    @Redirect('/cargos/criar')
+        async criar(@Body() dados: CreateCargoDto) { 
+        await this.cargoService.create(dados);
     }
-
 }

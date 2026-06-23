@@ -3,6 +3,7 @@ import { Like } from "typeorm";
 import { Produto } from "./produto.entity";
 import { Marcas } from "../marca/marca.entity";
 import { Categoria } from "../categoria/categoria.entity";
+import { UpdateProdutoDto } from "./dtos/update-produto.dto";
 
 @Injectable()
 export class ProdutoService {
@@ -50,7 +51,7 @@ export class ProdutoService {
         return produto.save();
     }
 
-    async update(id: number, dados: any) {
+    async update(id: number, dados: UpdateProdutoDto) {
         await Produto.update({ id_pro: id }, {
             nome_pro: dados.nome_pro,
             descricao_pro: dados.descricao_pro,

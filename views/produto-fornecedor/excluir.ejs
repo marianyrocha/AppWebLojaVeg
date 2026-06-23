@@ -1,18 +1,60 @@
-<h2>Excluir Vínculo de Fornecedor</h2>
+<% item = locals.item || {} %>
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+            <h4><%= locals.titulo %></h4>
+            <p class="mb-0">&raquo; Gerenciamento os itens do catálogo</p>
+        </div>
+    </div>
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicial</a></li>
+            <li class="breadcrumb-item"><a href="/produto-fornecedor">Consulta Catálogo</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Excluir Item do Catálogo</a></li>
+        </ol>
+    </div>
+</div>
 
-<p>Deseja realmente excluir este vínculo de fornecimento?</p>
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <div class="card border-danger">
+            <div class="card-header bg-danger p-3">
+                <h4 class="card-title text-white mb-0">Exclusão de vínculo</h4>
+            </div>
 
-<p>
-    <strong>Produto:</strong> <%= item.produto?.nome_pro %><br>
-    <strong>Fornecedor:</strong> <%= item.fornecedor?.nome_for %>
-</p>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <b>Esta ação excluirá o registro de forma permanente.</b>
+                </div>
 
-<form action="/produto-fornecedor/<%= item.id_pro_for %>/excluir" method="post">
-    <button type="submit" class="btn btn-danger">
-        Confirmar Exclusão
-    </button>
+                <p class="mb-4">
+                    Tem certeza que deseja excluir o vínculo de fornecimento abaixo?
+                </p>
 
-    <a href="/produto-fornecedor" class="btn btn-secondary">
-        Cancelar
-    </a>
-</form>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered mb-0">
+                        <tbody>
+                            <tr>
+                                <th>Produto</th>
+                                <td><%= item.produto?.nome_pro || 'Produto não encontrado' %></td>
+                            </tr>
+                            <tr>
+                                <th>Fornecedor</th>
+                                <td><%= item.fornecedor?.nome_for || 'Fornecedor não encontrado' %></td>
+                            </tr>
+                            <tr>
+                                <th>ID do Vínculo</th>
+                                <td>#<%= item.id_pro_for %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <form action="/produto-fornecedor/<%= item.id_pro_for %>/excluir" method="post">
+                    <button type="submit" class="btn btn-danger mr-2">Confirmar Exclusão</button>
+                    <a href="/produto-fornecedor" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

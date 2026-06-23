@@ -1,4 +1,4 @@
-      <div class="row">
+<div class="row">
         <div class="col-12">
           <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
             <div class="">
@@ -18,25 +18,20 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body p-4">
-<form action="<%= produto && produto.id_pro ? '/produtos/' + produto.id_pro + '/editar' : '/produtos/criar' %>" method="post">                <div class="row">
-                  <div class="col-md-14 mb-3">
+              <form action="<%= produto && produto.id_pro ? '/produtos/' + produto.id_pro + '/editar' : '/produtos/criar' %>" method="post">
+                
+                <div class="row">
+                  <div class="col-md-6 mb-3">
                     <label for="productName" class="form-label">Nome do Produto</label>
                     <input type="text" class="form-control" id="productName" name="nome_pro" value="<%= produto?.nome_pro || '' %>" placeholder="Digite o nome do produto" required>
                   </div>
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Status</label>
-                    <select class="form-select" name="status_pro" value="<%= produto?.status_pro || '' %>" required>
+                  <div class="col-md-6 mb-3">
+                    <label for="productStatus" class="form-label">Status</label>
+                    <select class="form-select" name="status_pro" required>
                       <option value="">Selecione</option>
-                      <option value="Ativo">Ativo</option>
-                      <option value="Inativo">Inativo</option>
+                      <option value="Ativo" <%= produto?.status_pro === 'Ativo' ? 'selected' : '' %>>Ativo</option>
+                      <option value="Inativo" <%= produto?.status_pro === 'Inativo' ? 'selected' : '' %>>Inativo</option>
                    </select>
-                  </div>
-                
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Quantidade</label>
-                    <input type="number" class="form-control" id="productStock" name="quantidade_pro" value="<%= produto?.quantidade_pro || '' %>" placeholder="0" required>
                   </div>
                 </div>
 
@@ -44,44 +39,46 @@
                   <div class="col-md-6 mb-3">
                     <label for="productPrice" class="form-label">Preço</label>
                     <input type="number" class="form-control" id="productPrice" name="preco_pro" value="<%= produto?.preco_pro || '' %>" placeholder="0.00" step="0.01" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="productStock" class="form-label">Quantidade</label>
+                    <input type="number" class="form-control" id="productStock" name="quantidade_pro" value="<%= produto?.quantidade_pro || '' %>" placeholder="0" required>
+                  </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Marca</label>
-                    <select class="form-select" name="marca_pro" value="<%= produto?.marca_pro || '' %>" required>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="productMarca" class="form-label">Marca</label>
+                    <select class="form-select" name="marca_pro" required>
                       <option value="">Selecione</option>
                       <% marcas.forEach(marca => { %>
-                          <option value="<%= marca.id_mar %>">
+                          <option value="<%= marca.id_mar %>" <%= produto?.marca_pro == marca.id_mar ? 'selected' : '' %>>
                               <%= marca.nome_mar %>
                           </option>
                       <% }) %>
                    </select>
                   </div>
-                </div>
-
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Categoria</label>
-                    <select class="form-select" name="categoria_pro" value="<%= produto?.categoria_pro || '' %>"  required>
+                  <div class="col-md-6 mb-3">
+                    <label for="productCategoria" class="form-label">Categoria</label>
+                    <select class="form-select" name="categoria_pro" required>
                       <option value="">Selecione</option>
                      <% categorias.forEach(categoria => { %>
-                          <option value="<%= categoria.id_cat %>">
+                          <option value="<%= categoria.id_cat %>" <%= produto?.categoria_pro == categoria.id_cat ? 'selected' : '' %>>
                               <%= categoria.nome_cat %>
                           </option>
                       <% }) %>
                    </select>
                   </div>
+                </div>
             
-                   <div class="mb-3">
+                <div class="mb-3">
                   <label for="productImage" class="form-label">Imagem do Produto</label>
-                  <input type="file" class="form-control" id="productImage" accept="image/*" name="imagem_pro" value="<%= produto?.imagem_pro || '' %>" required>
+                  <input type="file" class="form-control" id="productImage" accept="image/*" name="imagem_pro">
                 </div>
 
                 <div class="mb-3">
                   <label for="productDescription" class="form-label">Descrição</label>
-                  <textarea class="form-control" id="productDescription" rows="4" name="descricao_pro"
-                   value="<%= produto?.descricao_pro || '' %>"  placeholder="Insira uma descrição para o produto"></textarea>
+                  <textarea class="form-control" id="productDescription" rows="4" name="descricao_pro" placeholder="Insira uma descrição para o produto"><%= produto?.descricao_pro || '' %></textarea>
                 </div>
 
                 <div class="d-flex gap-2">
@@ -89,13 +86,10 @@
                   <button type="reset" class="btn btn-secondary">Limpar</button>
                 </div>
             
-                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-</div>
 </main>
-

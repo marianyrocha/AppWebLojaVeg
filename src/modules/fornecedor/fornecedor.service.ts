@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Fornecedor } from "./fornecedor.entity";
+import { CreateFornecedorDto } from "./dtos/create-fornecedor.dto";
 
 @Injectable()
 export class FornecedorService {     
@@ -7,7 +8,7 @@ export class FornecedorService {
         return Fornecedor.find();
     }
 
-    async create(dados: any): Promise<Fornecedor> {
+    async create(dados: CreateFornecedorDto): Promise<Fornecedor> {
         const fornecedor = Fornecedor.create({
             nome_for: dados.nome_for,
             email_for: dados.email_for,

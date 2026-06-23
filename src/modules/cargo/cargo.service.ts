@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Cargo } from "./cargo.entity";
+import { CreateCargoDto } from "./dtos/create-cargo.dto";
 
 @Injectable()
 export class CargoService {     
@@ -7,7 +8,7 @@ export class CargoService {
         return Cargo.find();
     }
 
-    async create(dados: any): Promise<Cargo> {
+    async create(dados: CreateCargoDto): Promise<Cargo> {
         const cargo = Cargo.create({
             nome_car: dados.nome_car,
             descricao_car: dados.descricao_car,
@@ -15,6 +16,5 @@ export class CargoService {
         });
 
         return cargo.save();
-
     }
 }

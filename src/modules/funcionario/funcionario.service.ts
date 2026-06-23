@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Funcionario } from "./funcionario.entity";
 import { Cargo } from "../cargo/cargo.entity";
+import { CreateFuncionarioDto } from "./dtos/create-funcionario.dto";
 
 @Injectable()
 export class FuncionarioService {     
@@ -8,7 +9,7 @@ export class FuncionarioService {
         return Funcionario.find();
     }
 
-    async create(dados: any): Promise<Funcionario> {
+    async create(dados: CreateFuncionarioDto): Promise<Funcionario> {
         const funcionario = Funcionario.create({
             nome_fun: dados.nome_fun,
             email_fun: dados.email_fun,

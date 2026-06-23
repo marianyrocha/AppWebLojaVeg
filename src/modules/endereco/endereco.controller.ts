@@ -1,6 +1,7 @@
 import { Body, Controller, Get, UseGuards, Post, Redirect, Render, Param, HttpCode } from "@nestjs/common";
 import { EnderecoService } from "./endereco.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreateEnderecoDto } from "./dtos/create-endereco.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('enderecos')
@@ -20,10 +21,9 @@ export class EnderecoController {
     }
 
     @Post('criar')
-    @Redirect('/clientes/criar')
-    async criar(@Body() body: any) {
-        console.log(body);
-        await this.enderecoService.create(body);
+    @Redirect('/enderecos/criar')
+        async criar(@Body() dados: CreateEnderecoDto) { 
+        await this.enderecoService.create(dados);
     }
 
 }

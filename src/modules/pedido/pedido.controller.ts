@@ -3,6 +3,8 @@ import { PedidoService } from "./pedido.service";
 import { ClienteService } from "../cliente/cliente.service";
 import { FuncionarioService } from "../funcionario/funcionario.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { CreatePedidoDto } from "./dtos/create-pedido.dto";
+import { UpdatePedidoDto } from "./dtos/update-pedido.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('pedidos')
@@ -50,9 +52,11 @@ export class PedidoController {
 
     @Post('criar')
     @Redirect('/pedidos')
-    async criar(@Body() body: any) {
-        await this.pedidoService.create(body);
+    async criar(@Body() dados: CreatePedidoDto) { 
+        await this.pedidoService.create(dados);
     }
+
+
 
     @Get(':id/editar')
     @Render('pedido/formulario')
@@ -72,7 +76,7 @@ export class PedidoController {
 
     @Post(':id/editar')
     @Redirect('/pedidos')
-    async atualizar(@Param('id') id: number, @Body() body: any) {
+    async atualizar(@Param('id') id: number, @Body() body: UpdatePedidoDto) {
         await this.pedidoService.update(Number(id), body);
     }
 

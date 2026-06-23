@@ -3,6 +3,8 @@ import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";``
 import { ProdutoService } from "./produto.service";
 import { MarcaService } from "../marca/marca.service";
 import { CategoriaService } from "../categoria/categoria.service";
+import { CreateProdutoDto } from "./dtos/create-produto.dto";
+import { UpdateProdutoDto } from "./dtos/update-produto.dto";
 
 @UseGuards(AutenticacaoGuard)
 @Controller('produtos')
@@ -50,8 +52,8 @@ export class ProdutoController {
 
     @Post('criar')
     @Redirect('/produtos')
-    async criar(@Body() body: any) {
-        await this.produtoService.create(body);
+    async criar(@Body() dados: CreateProdutoDto) { 
+        await this.produtoService.create(dados);
     }
 
     @Get(':id/editar')
@@ -72,7 +74,7 @@ export class ProdutoController {
 
     @Post(':id/editar')
     @Redirect('/produtos')
-    async atualizar(@Param('id') id: number, @Body() body: any) {
+    async atualizar(@Param('id') id: number, @Body() body: UpdateProdutoDto) {
         await this.produtoService.update(Number(id), body);
     }
 

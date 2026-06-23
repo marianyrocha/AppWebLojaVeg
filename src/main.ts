@@ -7,10 +7,17 @@ import { Logger } from '@nestjs/common';
 import expressEjsLayouts from 'express-ejs-layouts';
 import { registerHelpers } from './helpers';
 import session = require('express-session');
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true,
+  }));
+  
   app.use(session({
     secret: 'veganize-tech-secret', 
     resave: false,

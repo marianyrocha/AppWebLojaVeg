@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Categoria } from "./categoria.entity";
+import { CreateCategoriaDto } from "./dtos/create-categoria.dto";
 
 @Injectable()
 export class CategoriaService {     
@@ -7,7 +8,7 @@ export class CategoriaService {
         return Categoria.find();
     }
 
-    async create(dados: any): Promise<Categoria> {
+    async create(dados: CreateCategoriaDto): Promise<Categoria> {
         const categoria = Categoria.create({
             nome_cat: dados.nome_cat,
             descricao_cat: dados.descricao_cat,
