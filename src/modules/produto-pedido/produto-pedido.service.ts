@@ -157,4 +157,17 @@ export class ProdutoPedidoService {
 
         await this.atualizarValorTotalPedido(idPedido);
     }
+
+    async relatorio(): Promise<ProdutoPedido[]> {
+    return ProdutoPedido.find({
+        relations: {
+            pedido: true,
+            produto: true
+        },
+        order: {
+            id_pro_ped: 'DESC'
+        }
+    });
+}
+
 }

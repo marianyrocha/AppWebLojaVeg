@@ -1,4 +1,4 @@
-import { Body, Controller, Get, UseGuards, Post, Param, Redirect, Render, Query } from "@nestjs/common";
+import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, Query } from "@nestjs/common";
 import { ProdutoPedidoService } from "./produto-pedido.service";
 import { PedidoService } from "../pedido/pedido.service";
 import { ProdutoService } from "../produto/produto.service";
@@ -24,6 +24,24 @@ export class ProdutoPedidoController {
             titulo: 'Itens do Pedido',
             itens,
             rotaAtual: '/produto-pedido'
+        };
+    }
+
+    @Get('relatorio')
+    @Render('produto-pedido/relatorio')
+    async relatorio() {
+        const itens = await this.produtoPedidoService.relatorio();
+        const totalItens = itens.length;
+        const quantidadeVendida = itens.reduce((total, item) => total + item.quantidade_pro_ped, 0);
+        const faturamento = itens.reduce((total, item) => total + (item.quantidade_pro_ped * item.preco_unitario_pro_ped), 0);
+
+        return {
+            titulo: 'Relatório de Pedidos x Produtos',
+            itens,
+            totalItens,
+            quantidadeVendida,
+            faturamento,
+            rotaAtual: '/produto-pedido/relatorio'
         };
     }
 
@@ -68,10 +86,7 @@ export class ProdutoPedidoController {
 
     @Post(':id/editar')
     @Redirect('/pedidos')
-    async atualizar(
-        @Param('id') id: string,
-        @Body() dados: UpdateProdutoPedidoDto
-    ) {
+    async atualizar(@Param('id') id: string, @Body() dados: UpdateProdutoPedidoDto) {
         await this.produtoPedidoService.update(Number(id), dados);
     }
 
@@ -79,7 +94,6 @@ export class ProdutoPedidoController {
     @Render('produto-pedido/excluir')
     async excluir(@Param('id') id: string) {
         const item = await this.produtoPedidoService.findOne(Number(id));
-
         return {
             titulo: 'Excluir Item',
             item,

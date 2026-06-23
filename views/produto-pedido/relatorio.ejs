@@ -1,0 +1,74 @@
+<div class="row g-3 mb-4">
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h6>Total de Pedidos</h6>
+                <h3><%= totalItens %></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h6>Itens Vendidos</h6>
+                <h3><%= quantidadeVendida %></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h6>Faturamento</h6>
+                <h3>
+                    R$ <%= faturamento.toFixed(2) %>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-body">
+
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% itens.forEach(item => { %>
+
+                    <tr>
+                        <td>#<%= item.pedido.id_ped %></td>
+                        <td><%= item.produto.nome_pro %></td>
+                        <td><%= item.quantidade_pro_ped %></td>
+                        <td>R$ <%= item.preco_unitario_pro_ped %></td>
+                        <td>
+                            R$
+                            <%= (
+                                item.quantidade_pro_ped *
+                                item.preco_unitario_pro_ped
+                            ).toFixed(2) %>
+                        </td>
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
