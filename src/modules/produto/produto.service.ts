@@ -41,10 +41,10 @@ export class ProdutoService {
             status_pro: dados.status_pro,
             imagem_pro: dados.imagem_pro,
             marca: {
-                id_mar: Number(dados.marca_pro)
+                id_mar: Number(dados.marca)
             } as Marcas,
             categoria: {
-                id_cat: Number(dados.categoria_pro)
+                id_cat: Number(dados.categoria)
             } as Categoria
         });
 

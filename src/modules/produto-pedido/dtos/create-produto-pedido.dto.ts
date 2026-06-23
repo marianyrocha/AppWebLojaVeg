@@ -1,36 +1,29 @@
 import { Transform } from "class-transformer";
-import { IsNotEmpty, IsDecimal, MinLength, IsNumber, Min, IsOptional, IsString } from "class-validator";
-
-const toDecimalNumber = (value: unknown): unknown => {
-  const normalizedValue: unknown = Array.isArray(value)
-    ? (value as unknown[])[value.length - 1]
-    : value;
-
-  if (typeof normalizedValue === 'string') {
-    return Number(normalizedValue.replace(',', '.'));
-  }
-  return normalizedValue;
-};
+import { IsNotEmpty, IsNumber, Min } from "class-validator";
 
 export class CreateProdutoPedidoDto {
 
   @IsNotEmpty({ message: 'A quantidade é obrigatória' })
-  @Transform(({ value }) => parseInt(value))
+  @Transform(({ value }) => Number(value))
   @IsNumber()
+  @Min(1)
   quantidade_pro_ped!: number;
 
   @IsNotEmpty({ message: 'O preço unitário é obrigatório' })
-  @IsDecimal({ decimal_digits: '2' }, { message: 'O valor deve ter 2 casas decimais' })
-  @Transform(({ value }) => parseFloat(value))
+  @Transform(({ value }) => Number(String(value).replace(',', '.')))
+  @IsNumber(
+    { maxDecimalPlaces: 2 },
+    { message: 'O valor deve ter no máximo 2 casas decimais' }
+  )
   preco_unitario_pro_ped!: number;
 
   @IsNotEmpty({ message: 'O ID do pedido é obrigatório' })
-  @Transform(({ value }) => parseInt(value))
+  @Transform(({ value }) => Number(value))
   @IsNumber()
-  pedido_ped!: number;
+  pedido_id!: number;
 
   @IsNotEmpty({ message: 'O ID do produto é obrigatório' })
-  @Transform(({ value }) => parseInt(value))
+  @Transform(({ value }) => Number(value))
   @IsNumber()
-  produto_pro!: number;
+  produto_id!: number;
 }

@@ -49,10 +49,10 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="productMarca" class="form-label">Marca</label>
-                    <select class="form-select" name="marca_pro" required>
+                    <select class="form-select" name="marca" required>
                       <option value="">Selecione</option>
                       <% marcas.forEach(marca => { %>
-                          <option value="<%= marca.id_mar %>" <%= produto?.marca_pro == marca.id_mar ? 'selected' : '' %>>
+                          <option value="<%= marca.id_mar %>" <%= produto?.marca == marca.id_mar ? 'selected' : '' %>>
                               <%= marca.nome_mar %>
                           </option>
                       <% }) %>
@@ -60,7 +60,7 @@
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="productCategoria" class="form-label">Categoria</label>
-                    <select class="form-select" name="categoria_pro" required>
+                    <select class="form-select" name="categoria" required>
                       <option value="">Selecione</option>
                      <% categorias.forEach(categoria => { %>
                           <option value="<%= categoria.id_cat %>" <%= produto?.categoria_pro == categoria.id_cat ? 'selected' : '' %>>
