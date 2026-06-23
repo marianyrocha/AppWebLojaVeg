@@ -1,68 +1,84 @@
 <div class="col-12">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-    <div class="">
-        <h1 class="fs-3 mb-1">Novo Cliente</h1>
-        <p class="mb-0">Adicione um novo cliente</p>
-    </div>
-    <div>
-      <div>
-        <a href="/enderecos/criar" class="btn btn-primary">Adicionar Endereço</a>
-      </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body p-4">
-<form    action="/clientes/criar" method="POST">
+        <div>
+            <h1 class="fs-3 mb-1">
+                <%= cliente && cliente.id_cli ? 'Editar Cliente' : 'Novo Cliente' %>
+            </h1>
+            <p class="mb-0">
+                <%= cliente && cliente.id_cli ? 'Edite os dados do cliente' : 'Adicione um novo cliente' %>
+            </p>
+        </div>
 
-
-    <div class="col-md-12 mb-3">
-        <label for="cliente" class="form-label">Nome do cliente</label>
-        <input type="text" class="form-control" id="productName" name="nome_cli" placeholder="Digite o nome da cliente" required>
+        <div>
+            <div>
+                <a href="/enderecos/criar" class="btn btn-primary">Adicionar Endereço</a>
+                <a href="/clientes" class="btn btn-secondary">Consultar Clientes</a>
+            </div>
+        </div>
     </div>
 
+    <div class="card">
+        <div class="card-body p-4">
 
-<div class="row">
+            <form action="<%= rotaAtual %>" method="POST">
 
-    <div class="col-md-6 mb-3">
-        <label for="telefone" class="form-label">Telefone</label>
-        <input type="text" class="form-control" id="productName" name="telefone_cli" placeholder="Digite o nome da cliente" required>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Nome do cliente</label>
+                    <input type="text" class="form-control" name="nome_cli"
+                        value="<%= cliente.nome_cli || '' %>"
+                        placeholder="Digite o nome do cliente" required>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Telefone</label>
+                        <input type="text" class="form-control" name="telefone_cli"
+                            value="<%= cliente.telefone_cli || '' %>"
+                            placeholder="Digite o telefone" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" name="email_cli"
+                            value="<%= cliente.email_cli || '' %>"
+                            placeholder="Digite o email" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Data de Nascimento</label>
+                        <input type="date" class="form-control" name="data_nascimento_cli"
+                            value="<%= cliente?.data_nascimento_cli ? new Date(cliente.data_nascimento_cli).toISOString().split('T')[0] : '' %>"
+                        </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Endereço</label>
+
+                        <select class="form-select" name="fk_endereco_id_end" required>
+                            <option value="">Selecione</option>
+
+                            <% enderecos.forEach(endereco => { %>
+                                <option value="<%= endereco.id_end %>"
+                                    <%= cliente.fk_endereco_id_end == endereco.id_end ? 'selected' : '' %>>
+                                    <%= endereco.rua_end %>, Nº <%= endereco.numero_end %>
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <%= cliente && cliente.id_cli ? 'Salvar Alterações' : 'Adicionar cliente' %>
+                    </button>
+
+                    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+                </div>
+
+            </form>
+
+        </div>
     </div>
-
-    <div class="col-md-6 mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control" id="productName" name="email_cli" placeholder="Digite o nome da cliente" required>
-    </div>
-    
-    <div class="col-md-6 mb-3">
-        <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-        <input type="date" class="form-control" id="productName" name="data_nascimento_cli" placeholder="Digite o nome da cliente" >
-    </div>
-
-    <div class="col-md-6 mb-3">
-        <label for="Endereco" class="form-label">Endereço</label>
-
-        <select class="form-select" name="endereco_cli" required>
-            <option value="">Selecione</option>
-
-            <% enderecos.forEach(endereco => { %>
-                <option value="<%= endereco.id_end %>">
-                    <%= endereco.rua_end %>, Nº <%= endereco.numero_end %>
-                </option>
-            <% }) %>
-
-        </select>
-    </div>
-
-
-</div>
-
-
-    <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Adicionar cliente</button>
-        <button type="reset" class="btn btn-secondary">Limpar</button>
-    </div>
-
-</form>
-</div>
-</div>
 </div>

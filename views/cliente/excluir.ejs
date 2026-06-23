@@ -1,0 +1,81 @@
+<% cliente = locals.cliente || {} %>
+
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+            <h4><%= locals.titulo %></h4>
+            <p class="mb-0">&raquo; Gerenciamento de Clientes</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicial</a></li>
+            <li class="breadcrumb-item"><a href="/clientes">Consulta de Clientes</a></li>
+            <li class="breadcrumb-item active">
+                <a href="javascript:void(0)">Excluir Cliente</a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <div class="card border-danger">
+
+            <div class="card-header bg-danger p-3">
+                <h4 class="card-title text-white mb-0">
+                    Exclusão de cliente
+                </h4>
+            </div>
+
+            <div class="card-body">
+
+                <div class="alert alert-warning">
+                    <b>Esta ação excluirá o registro de forma permanente.</b>
+                </div>
+
+                <p class="mb-4">
+                    Tem certeza que deseja excluir o cliente abaixo?
+                </p>
+
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered mb-0">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <td>#<%= cliente.id_cli %></td>
+                            </tr>
+
+                            <tr>
+                                <th>Nome</th>
+                                <td><%= cliente.nome_cli %></td>
+                            </tr>
+
+                            <tr>
+                                <th>Email</th>
+                                <td><%= cliente.email_cli %></td>
+                            </tr>
+
+                            <tr>
+                                <th>Telefone</th>
+                                <td><%= cliente.telefone_cli %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <form action="/clientes/<%= cliente.id_cli %>/excluir" method="post">
+                    <button type="submit" class="btn btn-danger mr-2">
+                        Confirmar Exclusão
+                    </button>
+
+                    <a href="/clientes" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -41,7 +41,7 @@ export class CreateFuncionarioDto {
     @IsNotEmpty({ message: 'Selecione um cargo' })
     @IsNumber()
     @Transform(({ value }) => parseInt(value))
-    cargo_fun!: number;
+    fk_cargo_id_car!: number;
 
     @IsNotEmpty({ message: 'O status do funcionário é obrigatório' })
     @MinLength(3, { message: 'O status deve possuir no mínimo 3 caracteres'})

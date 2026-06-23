@@ -2,12 +2,12 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h1 class="fs-3 mb-1">Fornecedores</h1>
-                <p class="mb-0">Gerencie seus fornecedores</p>
+                <h1 class="fs-3 mb-1">Clientes</h1>
+                <p class="mb-0">Gerencie seus clientes</p>
             </div>
             <div>
-                <a href="/fornecedor/criar" class="btn btn-primary">
-                    Adicionar Fornecedor
+                <a href="/clientes/criar" class="btn btn-primary">
+                    Adicionar Cliente
                 </a>
             </div>
         </div>
@@ -17,14 +17,14 @@
 <div class="row">
     <div class="col-12">
 
-        <form action="/fornecedor" method="GET"
+        <form action="/clientes" method="GET"
             class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
 
             <input
                 type="text"
                 name="termo"
                 class="form-control"
-                placeholder="Buscar fornecedor..."
+                placeholder="Buscar cliente..."
                 style="max-width: 970px;"
                 value="<%= typeof termo !== 'undefined' ? termo : '' %>">
 
@@ -33,7 +33,7 @@
                     Buscar
                 </button>
 
-                <a href="/fornecedor" class="btn btn-outline-secondary">
+                <a href="/clientes" class="btn btn-outline-secondary">
                     Limpar
                 </a>
             </div>
@@ -47,44 +47,57 @@
                 <thead class="table-light border-light">
                     <tr>
                         <th>Nome</th>
-                        <th>Email</th>
                         <th>Telefone</th>
-                        <th>Razão Social</th>
-                        <th>CNPJ</th>
+                        <th>Email</th>
+                        <th>Data Nascimento</th>
+                        <th>Endereço</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    <% fornecedores.forEach(fornecedor => { %>
+                    <% clientes.forEach(cliente => { %>
 
                         <tr class="align-middle">
 
-                            <td><%= fornecedor.nome_for %></td>
+                            <td>
+                                <%= cliente.nome_cli %>
+                            </td>
 
-                            <td><%= fornecedor.email_for %></td>
+                            <td>
+                                <%= cliente.telefone_cli %>
+                            </td>
 
-                            <td><%= fornecedor.telefone_for %></td>
+                            <td>
+                                <%= cliente.email_cli %>
+                            </td>
 
-                            <td><%= fornecedor.razao_social_for %></td>
+                            <td>
+                                <%= new Date(cliente.data_nascimento_cli).toLocaleDateString('pt-BR') %>
+                            </td>
 
-                            <td><%= fornecedor.cnpj_for %></td>
+                            <td>
+                                <%= cliente.endereco?.rua_end || 'Não informado' %>,
+                                Nº <%= cliente.endereco?.numero_end || '-' %>
+                            </td>
 
                             <td>
 
-                                <a href="/fornecedor/<%= fornecedor.id_for %>/editar"
+                                <a href="/clientes/<%= cliente.id_cli %>/editar"
                                     class="text-secondary me-2"
-                                    title="Editar Fornecedor">
+                                    title="Editar Cliente">
 
                                     <i class="bi bi-pencil-square fs-5"></i>
+
                                 </a>
 
-                                <a href="/fornecedor/<%= fornecedor.id_for %>/excluir"
+                                <a href="/clientes/<%= cliente.id_cli %>/excluir"
                                     class="text-danger"
-                                    title="Excluir Fornecedor">
+                                    title="Excluir Cliente">
 
                                     <i class="bi bi-trash fs-5"></i>
+
                                 </a>
 
                             </td>

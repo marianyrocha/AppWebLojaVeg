@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Endereco } from "../endereco/endereco.entity";
 
 @Entity('clientes')
@@ -20,9 +20,6 @@ export class Clientes extends BaseEntity {
     data_nascimento_cli!: Date;
 
     @ManyToOne(() => Endereco)
-    @JoinColumn({
-        name: 'fk_endereco_id_end'
-    })
+    @JoinColumn({ name: 'fk_endereco_id_end' })
     endereco!: Endereco;
-
 }
