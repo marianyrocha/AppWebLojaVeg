@@ -16,4 +16,4 @@ Template: InApp – Free Bootstrap 5 Admin Dashboard Template
 
 #### Modelo Lógico do Banco de Dados:
 
-<img width="560" height="466" alt="Screenshot 2026-06-03 at 20 21 06" src="https://github.com/user-attachments/assets/4fb083b9-351a-437b-b785-23e65ffa36f4" />
+<img width="542" height="443" alt="Screenshot 2026-06-23 at 16 44 02" src="https://github.com/user-attachments/assets/5e5ff3de-0a54-41d3-b25e-1f59aa059723" />
