@@ -6,9 +6,12 @@ import { Like } from "typeorm";
 import { UpdaFuncionarioDto } from "./dtos/update-funcionario.dto";
 
 @Injectable()
-export class FuncionarioService {     
+export class FuncionarioService {
+    
     async findAll(): Promise<Funcionario[]> {
-        return Funcionario.find();
+        return Funcionario.find({
+            relations: ['cargo']
+        });
     }
 
     async create(dados: CreateFuncionarioDto): Promise<Funcionario> {
@@ -20,33 +23,25 @@ export class FuncionarioService {
             telefone_fun: dados.telefone_fun,
             data_nascimento_fun: dados.data_nascimento_fun,
             status_fun: dados.status_fun,
-
             cargo: {
                 id_car: Number(dados.fk_cargo_id_car)
             } as Cargo
-            
         });
 
         return funcionario.save();
-
     }
 
     async buscar(termo: string): Promise<Funcionario[]> {
-
-    return Funcionario.find({
-        where: [
-            {
-                nome_fun: Like(`%${termo}%`)
-            },
-            {
-                email_fun: Like(`%${termo}%`)
-            },
-            {
-                telefone_fun: Like(`%${termo}%`)
-            }
-        ],
-    });
+        return Funcionario.find({
+            where: [
+                { nome_fun: Like(`%${termo}%`) },
+                { email_fun: Like(`%${termo}%`) },
+                { telefone_fun: Like(`%${termo}%`) }
+            ],
+            relations: ['cargo']
+        });
     }
+
     async findOne(id: number): Promise<Funcionario | null> {
         return Funcionario.findOne({
             where: {
@@ -55,7 +50,7 @@ export class FuncionarioService {
             relations: ['cargo']
         });
     }
-    
+
     async delete(id: number) {
         await Funcionario.delete({
             id_fun: id
@@ -63,18 +58,20 @@ export class FuncionarioService {
     }
 
     async update(id: number, dados: UpdaFuncionarioDto) {
-        await Funcionario.update({ id_fun: id }, {
-            nome_fun: dados.nome_fun,
-            email_fun: dados.email_fun,
-            senha_fun: dados.senha_fun,
-            cpf_fun: dados.cpf_fun,
-            telefone_fun: dados.telefone_fun,
-            data_nascimento_fun: dados.data_nascimento_fun,
-            status_fun: dados.status_fun,
-
-            cargo: {
-                id_car: Number(dados.fk_cargo_id_car)
-            } as Cargo
-        });
+        await Funcionario.update(
+            { id_fun: id },
+            {
+                nome_fun: dados.nome_fun,
+                email_fun: dados.email_fun,
+                senha_fun: dados.senha_fun,
+                cpf_fun: dados.cpf_fun,
+                telefone_fun: dados.telefone_fun,
+                data_nascimento_fun: dados.data_nascimento_fun,
+                status_fun: dados.status_fun,
+                cargo: {
+                    id_car: Number(dados.fk_cargo_id_car)
+                } as Cargo
+            }
+        );
     }
 }

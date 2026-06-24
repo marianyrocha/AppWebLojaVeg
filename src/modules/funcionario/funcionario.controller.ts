@@ -1,4 +1,4 @@
-import { Body, Query, Controller, UseGuards, Get, Post, Redirect, Render, Param } from "@nestjs/common";
+import { Body, Req, Res, Query, Controller, UseGuards, Get, Post, Redirect, Param } from "@nestjs/common";
 import { FuncionarioService } from "./funcionario.service";
 import { CargoService } from "../cargo/cargo.service";
 import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
@@ -14,81 +14,112 @@ export class FuncionarioController {
     ) {}
 
     @Get('criar')
-    @Render('funcionario/formulario')
-    async formulario(): Promise<object> {
+    async formulario(@Req() req, @Res() res) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
 
         const cargos = await this.cargoService.findAll();
 
-        return {
+        return res.render('funcionario/formulario', {
             titulo: 'Cadastro de funcionario',
             rotaAtual: '/funcionarios/criar',
             funcionario: {},
             cargos
-        };
+        });
     }
 
     @Get()
-    @Render('funcionario/inicial')
-    async inicial(@Query('termo') termo?: string) {
+    async inicial(@Req() req, @Res() res, @Query('termo') termo?: string) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
 
         const funcionarios = termo
             ? await this.funcionarioService.buscar(termo)
             : await this.funcionarioService.findAll();
 
-        return {
+        return res.render('funcionario/inicial', {
             titulo: 'Consulta de funcionarios',
             funcionarios,
             termo,
             rotaAtual: '/funcionarios'
-        };
+        });
     }
 
     @Post('criar')
-    @Redirect('/funcionarios')
-    async criar(@Body() dados: CreateFuncionarioDto) {
+    async criar(@Req() req, @Res() res, @Body() dados: CreateFuncionarioDto) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
+
         await this.funcionarioService.create(dados);
-    }
-
-    @Get(':id/excluir')
-    @Render('funcionario/excluir')
-    async excluir(@Param('id') id: string) {
-
-        const funcionario = await this.funcionarioService.findOne(Number(id));
-
-        return {
-            titulo: 'Excluir funcionario',
-            funcionario,
-            rotaAtual: '/funcionarios'
-        };
-    }
-
-    @Post(':id/excluir')
-    @Redirect('/funcionarios')
-    async remover(@Param('id') id: string) {
-        await this.funcionarioService.delete(Number(id));
+        return res.redirect('/funcionarios');
     }
 
     @Get(':id/editar')
-    @Render('funcionario/formulario')
-    async editar(@Param('id') id: string) {
+    async editar(@Req() req, @Res() res, @Param('id') id: string) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
 
         const funcionario = await this.funcionarioService.findOne(Number(id));
         const cargos = await this.cargoService.findAll();
 
-        return {
+        return res.render('funcionario/formulario', {
             titulo: 'Editar funcionario',
             rotaAtual: `/funcionarios/${id}/editar`,
             funcionario,
             cargos
-        };
+        });
     }
 
     @Post(':id/editar')
-    @Redirect('/funcionarios')
-    async atualizar(
-        @Param('id') id: string,
-        @Body() dados: CreateFuncionarioDto
-    ) {
+    async atualizar(@Req() req, @Res() res, @Param('id') id: string, @Body() dados: CreateFuncionarioDto) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
+
         await this.funcionarioService.update(Number(id), dados);
+        return res.redirect('/funcionarios');
+    }
+
+    @Get(':id/excluir')
+    async excluir(@Req() req, @Res() res, @Param('id') id: string) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
+
+        const funcionario = await this.funcionarioService.findOne(Number(id));
+
+        return res.render('funcionario/excluir', {
+            titulo: 'Excluir funcionario',
+            funcionario,
+            rotaAtual: '/funcionarios'
+        });
+    }
+
+    @Post(':id/excluir')
+    async remover(@Req() req, @Res() res, @Param('id') id: string) {
+        const user = req.session?.funcionario;
+
+        if (!user || user.cargo?.id_car !== 2) {
+            return res.redirect('/');
+        }
+
+        await this.funcionarioService.delete(Number(id));
+        return res.redirect('/funcionarios');
     }
 }

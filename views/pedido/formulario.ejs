@@ -1,107 +1,114 @@
-      <div class="row">
-        <div class="col-12">
-          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-            <div class="">
-              <h1 class="fs-3 mb-1">Novo Pedido</h1>
-              <p class="mb-0">Gerencie seu estoque</p>
-            </div>
-            <div>
-              <a href="inventory.html" class="btn btn-primary">Ver Todos os pedidos</a>
-            </div>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+      <div>
+        <h1 class="fs-3 mb-1"><%= pedido?.id_ped ? 'Editar Pedido' : 'Novo Pedido' %></h1>
+        <p class="mb-0">Gerencie seu estoque</p>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body p-4">
-<form action="<%= pedido && pedido.id_ped ? '/pedidos/' + pedido.id_ped + '/editar' : '/pedidos/criar' %>" method="post">                <div class="row">
-                
-                
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Status</label>
-                    <select class="form-select" name="status_ped" value="<%= pedido?.status_ped || '' %>" required>
-                      <option value="">Selecione</option>
-                      <option value="Pago">Pago</option>
-                      <option value="Aberto">Aberto</option>
-                   </select>
-                </div>
-                
-                <div class="col-md-6 mb-3">
-                      <label for="productName" class="form-label">Forma de Pagamento</label>
-                      <select class="form-select" name="forma_pagamento_ped" value="<%= pedido?.forma_pagamento_ped || '' %>" required>
-                        <option value="">Selecione</option>
-                        <option value="Dinheiro">Dinheiro</option>
-                        <option value="Pix">Pix</option>
-                        <option value="Cartão de Crédito">Cartão de Crédito</option>
-                        <option value="Cartão de Débito">Cartão de Débito</option>
-                    </select>                
-                </div>  
-
-                <div class="col-md-6 mb-3">
-                  <label for="productPrice" class="form-label">Valor</label>
-                  <input type="number" class="form-control" id="productPrice" name="valor_ped" value="<%= pedido?.valor_ped || '' %>" placeholder="0.00" step="0.01" required>
-                </div>
-
-                  <div class="col-md-6 mb-3">
-                      <label for="productName" class="form-label">Data</label>
-                      <input type="date" class="form-control" id="productName" name="data_ped" value="<%= pedido?.data_ped || '' %>" placeholder="Digite o nome da categoria" required>
-                  </div>
-  
-
-                  <div class="col-md-6 mb-3">
-                      <label for="productName" class="form-label">Canal</label>
-                      <select class="form-select" name="canal_ped" value="<%= pedido?.canal_ped || '' %>" required>
-                        <option value="">Selecione</option>
-                        <option value="Loja Física">Loja Física</option>
-                        <option value="Loja Virtual">Loja Virtual</option>
-                    </select>                
-                  </div>        
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Cliente</label>
-                    <select class="form-select" name="cliente_ped" value="<%= pedido?.cliente_ped || '' %>" required>
-                      <option value="">Selecione</option>
-                      <% cliente.forEach(cliente => { %>
-                          <option value="<%= cliente.id_cli %>">
-                              <%= cliente.nome_cli %>
-                          </option>
-                      <% }) %>
-                   </select>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label for="productStock" class="form-label">Funcionario</label>
-                    <select class="form-select" name="funcionario_ped" value="<%= pedido?.funcionario_ped || '' %>" required>
-                    <option value="">Selecione</option>
-
-                    <% funcionario.forEach(funcionario => { %>
-                        <option value="<%= funcionario.id_fun %>">
-                            <%= funcionario.nome_fun %>
-                        </option>
-                    <% }) %>
-
-                    </select>
-                </div>
-              </div>
-
-     
-
-               
-                <div class="d-flex gap-2">
-                  <button type="submit" class="btn btn-primary">Adicionar pedido</button>
-                  <button type="reset" class="btn btn-secondary">Limpar</button>
-                </div>
-            
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div>
+        <a href="/pedidos" class="btn btn-primary">Ver Todos os pedidos</a>
       </div>
     </div>
+  </div>
 </div>
-</main>
 
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body p-4">
+
+        <form action="<%= pedido?.id_ped ? '/pedidos/' + pedido.id_ped + '/editar' : '/pedidos/criar' %>" method="post">
+
+          <div class="row">
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" name="status_ped" required>
+                <option value="">Selecione</option>
+                <option value="Pago" <%= pedido?.status_ped === 'Pago' ? 'selected' : '' %>>Pago</option>
+                <option value="Aberto" <%= pedido?.status_ped === 'Aberto' ? 'selected' : '' %>>Aberto</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Forma de Pagamento</label>
+              <select class="form-select" name="forma_pagamento_ped" required>
+                <option value="">Selecione</option>
+                <option value="Dinheiro" <%= pedido?.forma_pagamento_ped === 'Dinheiro' ? 'selected' : '' %>>Dinheiro</option>
+                <option value="Pix" <%= pedido?.forma_pagamento_ped === 'Pix' ? 'selected' : '' %>>Pix</option>
+                <option value="Cartão de Crédito" <%= pedido?.forma_pagamento_ped === 'Cartão de Crédito' ? 'selected' : '' %>>Cartão de Crédito</option>
+                <option value="Cartão de Débito" <%= pedido?.forma_pagamento_ped === 'Cartão de Débito' ? 'selected' : '' %>>Cartão de Débito</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Valor</label>
+              <input
+                type="number"
+                class="form-control"
+                name="valor_ped"
+                value="<%= pedido?.valor_ped || '' %>"
+                step="0.01"
+                required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Data</label>
+              <input
+                type="date"
+                class="form-control"
+                name="data_ped"
+                value="<%= pedido?.data_ped ? new Date(pedido.data_ped).toISOString().split('T')[0] : '' %>"
+                required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Canal</label>
+              <select class="form-select" name="canal_ped" required>
+                <option value="">Selecione</option>
+                <option value="Loja Física" <%= pedido?.canal_ped === 'Loja Física' ? 'selected' : '' %>>Loja Física</option>
+                <option value="Loja Virtual" <%= pedido?.canal_ped === 'Loja Virtual' ? 'selected' : '' %>>Loja Virtual</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Cliente</label>
+              <select class="form-select" name="cliente_ped" required>
+                <option value="">Selecione</option>
+                <% (clientes || []).forEach(c => { %>
+                  <option
+                    value="<%= c.id_cli %>"
+                    <%= pedido?.cliente?.id_cli === c.id_cli ? 'selected' : '' %>>
+                    <%= c.nome_cli %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Funcionário</label>
+              <select class="form-select" name="funcionario_ped" required>
+                <option value="">Selecione</option>
+                <% (funcionarios || []).forEach(f => { %>
+                  <option
+                    value="<%= f.id_fun %>"
+                    <%= pedido?.funcionario?.id_fun === f.id_fun ? 'selected' : '' %>>
+                    <%= f.nome_fun %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body">
                 <h6>Total de Pedidos</h6>
-                <h3><%= totalItens %></h3>
+                <h3><%= typeof totalItens !== 'undefined' ? totalItens : 0 %></h3>
             </div>
         </div>
     </div>
@@ -13,7 +13,10 @@
         <div class="card">
             <div class="card-body">
                 <h6>Itens Vendidos</h6>
-                <h3><%= quantidadeVendida %></h3>
+
+                <h3>
+                    <%= typeof quantidadeVendida !== 'undefined' ? quantidadeVendida : 0 %>
+                </h3>
             </div>
         </div>
     </div>
@@ -23,7 +26,7 @@
             <div class="card-body">
                 <h6>Faturamento</h6>
                 <h3>
-                    R$ <%= faturamento.toFixed(2) %>
+                    R$ <%= typeof faturamento !== 'undefined' ? faturamento.toFixed(2) : '0.00' %>
                 </h3>
             </div>
         </div>
@@ -48,18 +51,18 @@
 
             <tbody>
 
-                <% itens.forEach(item => { %>
+                <% (itens || []).forEach(item => { %>
 
                     <tr>
-                        <td>#<%= item.pedido.id_ped %></td>
-                        <td><%= item.produto.nome_pro %></td>
+                        <td>#<%= item.pedido?.id_ped %></td>
+                        <td><%= item.produto?.nome_pro %></td>
                         <td><%= item.quantidade_pro_ped %></td>
                         <td>R$ <%= item.preco_unitario_pro_ped %></td>
                         <td>
                             R$
                             <%= (
-                                item.quantidade_pro_ped *
-                                item.preco_unitario_pro_ped
+                                (item.quantidade_pro_ped || 0) *
+                                (item.preco_unitario_pro_ped || 0)
                             ).toFixed(2) %>
                         </td>
                     </tr>

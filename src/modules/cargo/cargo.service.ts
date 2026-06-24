@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { Cargo } from "./cargo.entity";
 import { CreateCargoDto } from "./dtos/create-cargo.dto";
+import { Funcionario } from "../funcionario/funcionario.entity";
 
-@Injectable()
-export class CargoService {     
-    async findAll(): Promise<Cargo[]> {
+    @Injectable()
+    export class CargoService {     
+        async findAll(): Promise<Cargo[]> {
         return Cargo.find();
     }
 
@@ -17,4 +18,12 @@ export class CargoService {
 
         return cargo.save();
     }
+
+    async validarFuncionario(email: string, senha: string) {
+    return await Funcionario.findOne({
+        where: { email_fun: email, senha_fun: senha },
+        relations: ['cargo'] 
+    });
+
+}
 }

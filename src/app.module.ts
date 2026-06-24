@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,7 +6,6 @@ import { DatabaseModule } from './config/database/database.module';
 import { ProdutoModule } from './modules/produto/produto.module';
 import { CategoriaModule } from './modules/categoria/categoria.module';
 import { MarcaModule } from './modules/marca/marca.module';
-import { Fornecedor } from './modules/fornecedor/fornecedor.entity';
 import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
 import { PedidoModule } from './modules/pedido/pedido.module';
 import { FuncionarioModule } from './modules/funcionario/funcionario.module';
@@ -17,7 +16,8 @@ import { ProdutoPedidoModule } from './modules/produto-pedido/produto-pedido.mod
 import { ProdutoFornecedorModule } from './modules/produto-fornecedor/produto-fornecedor.module';
 import { HomeModule } from './modules/home/home.module';
 import { AutenticacaoModule } from './modules/autenticacao/autenticacao.module';
-
+import { AutenticacaoMiddleware } from './middlewares/autenticacao.middlewares';
+import { ViewMiddleware } from './middlewares/view.middleware';
 
 @Module({
   imports: [
@@ -40,4 +40,11 @@ import { AutenticacaoModule } from './modules/autenticacao/autenticacao.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+
+
+  export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+      consumer.apply(ViewMiddleware).forRoutes('*');
+  }
+  
+}

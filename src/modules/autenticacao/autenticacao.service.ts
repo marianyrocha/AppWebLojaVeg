@@ -6,13 +6,12 @@ export class AutenticacaoService {
 
     async login(email: string, senha: string) {
 
-        const funcionario = await Funcionario.findOne({
+        return await Funcionario.findOne({
             where: {
                 email_fun: email,
                 senha_fun: senha
-            }
+            },
+            relations: ['cargo']
         });
-
-        return funcionario;
     }
 }

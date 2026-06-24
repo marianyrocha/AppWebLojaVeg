@@ -2,18 +2,16 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <h1 class="fs-3 mb-1">
-                <%= funcionario && funcionario.id_fun ? 'Editar Funcionário' : 'Novo Funcionário' %>
+                <%= funcionario?.id_fun ? 'Editar Funcionário' : 'Novo Funcionário' %>
             </h1>
             <p class="mb-0">
-                <%= funcionario && funcionario.id_fun ? 'Edite os dados do funcionário' : 'Adicione um novo funcionário' %>
+                <%= funcionario?.id_fun ? 'Edite os dados do funcionário' : 'Adicione um novo funcionário' %>
             </p>
         </div>
 
         <div>
-            <div>
-                <a href="/cargos/criar" class="btn btn-primary">Adicionar Cargo</a>
-                <a href="/funcionarios" class="btn btn-secondary">Consultar Funcionários</a>
-            </div>
+            <a href="/cargos/criar" class="btn btn-primary">Adicionar Cargo</a>
+            <a href="/funcionarios" class="btn btn-secondary">Consultar Funcionários</a>
         </div>
     </div>
 
@@ -27,41 +25,41 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Nome do funcionário</label>
                         <input type="text" class="form-control" name="nome_fun"
-                            value="<%= funcionario.nome_fun || '' %>"
+                            value="<%= funcionario?.nome_fun || '' %>"
                             placeholder="Digite o nome do funcionário" required>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Telefone</label>
                         <input type="text" class="form-control" name="telefone_fun"
-                            value="<%= funcionario.telefone_fun || '' %>"
+                            value="<%= funcionario?.telefone_fun || '' %>"
                             placeholder="Digite o telefone" required>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Email</label>
-                        <input type="text" class="form-control" name="email_fun"
-                            value="<%= funcionario.email_fun || '' %>"
+                        <input type="email" class="form-control" name="email_fun"
+                            value="<%= funcionario?.email_fun || '' %>"
                             placeholder="Digite o email" required>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Senha</label>
                         <input type="password" class="form-control" name="senha_fun"
-                            placeholder="Digite a senha" <%= funcionario.id_fun ? '' : 'required' %>>
+                            placeholder="Digite a senha" <%= funcionario?.id_fun ? '' : 'required' %>>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Data de Nascimento</label>
                         <input type="date" class="form-control" name="data_nascimento_fun"
-                        value="<%= funcionario.data_nascimento_fun ? new Date(funcionario.data_nascimento_fun).toISOString().split('T')[0] : '' %>"                            required>
-                            
+                            value="<%= funcionario?.data_nascimento_fun ? new Date(funcionario.data_nascimento_fun).toISOString().split('T')[0] : '' %>"
+                            required>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">CPF</label>
                         <input type="text" class="form-control" name="cpf_fun"
-                            value="<%= funcionario.cpf_fun || '' %>"
+                            value="<%= funcionario?.cpf_fun || '' %>"
                             placeholder="xxx.xxx.xxx-xx" required>
                     </div>
 
@@ -70,9 +68,9 @@
                         <select class="form-select" name="fk_cargo_id_car" required>
                             <option value="">Selecione</option>
 
-                            <% cargos.forEach(cargo => { %>
+                            <% (cargos || []).forEach(cargo => { %>
                                 <option value="<%= cargo.id_car %>"
-                                    <%= funcionario.fk_cargo_id_car == cargo.id_car ? 'selected' : '' %>>
+                                    <%= funcionario?.cargo?.id_car === cargo.id_car ? 'selected' : '' %>>
                                     <%= cargo.nome_car %>
                                 </option>
                             <% }) %>
@@ -84,8 +82,8 @@
                         <label class="form-label">Status</label>
                         <select class="form-select" name="status_fun" required>
                             <option value="">Selecione</option>
-                            <option value="Ativo" <%= funcionario.status_fun === 'Ativo' ? 'selected' : '' %>>Ativo</option>
-                            <option value="Inativo" <%= funcionario.status_fun === 'Inativo' ? 'selected' : '' %>>Inativo</option>
+                            <option value="Ativo" <%= funcionario?.status_fun === 'Ativo' ? 'selected' : '' %>>Ativo</option>
+                            <option value="Inativo" <%= funcionario?.status_fun === 'Inativo' ? 'selected' : '' %>>Inativo</option>
                         </select>
                     </div>
 
@@ -93,7 +91,7 @@
 
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">
-                        <%= funcionario && funcionario.id_fun ? 'Salvar Alterações' : 'Adicionar funcionário' %>
+                        <%= funcionario?.id_fun ? 'Salvar Alterações' : 'Adicionar funcionário' %>
                     </button>
 
                     <a href="/funcionarios" class="btn btn-secondary">Cancelar</a>

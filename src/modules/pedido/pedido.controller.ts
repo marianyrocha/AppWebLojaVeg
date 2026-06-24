@@ -1,4 +1,4 @@
-import { Body, Controller, UseGuards, Param, Get, Post, Redirect, Render, Query } from "@nestjs/common";
+import { Body, Controller, UseGuards, Param, Get, Post, Redirect, Render, Query, Req, Res } from "@nestjs/common";
 import { PedidoService } from "./pedido.service";
 import { ClienteService } from "../cliente/cliente.service";
 import { FuncionarioService } from "../funcionario/funcionario.service";
@@ -18,65 +18,64 @@ export class PedidoController {
 
     @Get()
     @Render('pedido/inicial')
-    async inicial(@Query('termo') termo: string): Promise<object> {
-        let listaPedidos;
+    async inicial(@Req() req, @Query('termo') termo: string) {
+        const funcionario = req.session?.funcionario;
 
-        if (termo) {
-            listaPedidos = await this.pedidoService.buscar(termo);
-        } else {
-            listaPedidos = await this.pedidoService.findAll();
-        }
+        const listaPedidos = termo
+            ? await this.pedidoService.buscar(termo)
+            : await this.pedidoService.findAll();
 
         return {
             titulo: 'Consulta de pedidos',
             pedidos: listaPedidos,
-            termo: termo,
-            rotaAtual: '/pedidos'
+            termo,
+            rotaAtual: '/pedidos',
+            cliente: await this.clienteService.findAll(),
+            funcionario: await this.funcionarioService.findAll(),
+            usuarioLogado: funcionario
         };
     }
-
+    
     @Get('criar')
     @Render('pedido/formulario')
-    async formulario(): Promise<object> {
-        const cliente = await this.clienteService.findAll();
-        const funcionario = await this.funcionarioService.findAll();
+    async formulario() {
+        const clientes = await this.clienteService.findAll();
+        const funcionarios = await this.funcionarioService.findAll();
 
         return {
             titulo: 'Cadastro de pedidos',
             rotaAtual: '/pedidos/criar',
             pedido: {},
-            cliente,
-            funcionario
+            clientes,
+            funcionarios
         };
     }
 
     @Post('criar')
     @Redirect('/pedidos')
-    async criar(@Body() dados: CreatePedidoDto) { 
+    async criar(@Body() dados: CreatePedidoDto) {
         await this.pedidoService.create(dados);
     }
-
-
 
     @Get(':id/editar')
     @Render('pedido/formulario')
     async editar(@Param('id') id: string) {
         const pedido = await this.pedidoService.findOne(Number(id));
-        const cliente = await this.clienteService.findAll();
-        const funcionario = await this.funcionarioService.findAll();
+        const clientes = await this.clienteService.findAll();
+        const funcionarios = await this.funcionarioService.findAll();
 
         return {
             titulo: 'Editar pedido',
             pedido,
-            cliente,
-            funcionario,
+            clientes,
+            funcionarios,
             rotaAtual: '/pedidos'
         };
     }
 
     @Post(':id/editar')
     @Redirect('/pedidos')
-    async atualizar(@Param('id') id: number, @Body() body: UpdatePedidoDto) {
+    async atualizar(@Param('id') id: string, @Body() body: UpdatePedidoDto) {
         await this.pedidoService.update(Number(id), body);
     }
 

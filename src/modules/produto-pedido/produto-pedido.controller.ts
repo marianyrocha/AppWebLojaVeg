@@ -1,4 +1,4 @@
-import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, Query } from "@nestjs/common";
+import { Body, Controller, UseGuards, Get, Post, Redirect, Render, Param, Query, Req } from "@nestjs/common";
 import { ProdutoPedidoService } from "./produto-pedido.service";
 import { PedidoService } from "../pedido/pedido.service";
 import { ProdutoService } from "../produto/produto.service";
@@ -18,36 +18,57 @@ export class ProdutoPedidoController {
 
     @Get()
     @Render('produto-pedido/inicial')
-    async inicial() {
+    async inicial(@Req() req) {
+
         const itens = await this.produtoPedidoService.findAll();
+
         return {
             titulo: 'Itens do Pedido',
             itens,
-            rotaAtual: '/produto-pedido'
+            rotaAtual: '/produto-pedido',
+            funcionario: req.session.funcionario
         };
     }
 
     @Get('relatorio')
     @Render('produto-pedido/relatorio')
-    async relatorio() {
-        const itens = await this.produtoPedidoService.relatorio();
-        const totalItens = itens.length;
-        const quantidadeVendida = itens.reduce((total, item) => total + item.quantidade_pro_ped, 0);
-        const faturamento = itens.reduce((total, item) => total + (item.quantidade_pro_ped * item.preco_unitario_pro_ped), 0);
+    async relatorio(@Req() req) {
+
+        const funcionario = req.session.funcionario;
+        const cargoId = funcionario?.cargo?.id_car;
+
+        if (cargoId !== 2) {
+            return {
+                titulo: 'Relatório de Pedidos x Produtos',
+                itens: [],
+                totalItens: 0,
+                quantidadeVendida: 0,
+                faturamento: 0,
+                rotaAtual: '/produto-pedido/relatorio',
+                funcionario
+            };
+        }
+
+        const itens = await this.produtoPedidoService.relatorio() || [];
 
         return {
             titulo: 'Relatório de Pedidos x Produtos',
             itens,
-            totalItens,
-            quantidadeVendida,
-            faturamento,
-            rotaAtual: '/produto-pedido/relatorio'
+            totalItens: itens.length,
+            quantidadeVendida: itens.reduce((t, i) => t + (i.quantidade_pro_ped || 0), 0),
+            faturamento: itens.reduce(
+                (t, i) => t + ((i.quantidade_pro_ped || 0) * (i.preco_unitario_pro_ped || 0)),
+                0
+            ),
+            rotaAtual: '/produto-pedido/relatorio',
+            funcionario
         };
     }
 
     @Get('criar')
     @Render('produto-pedido/formulario')
-    async formulario(@Query('pedidoId') pedidoId?: string) {
+    async formulario(@Req() req, @Query('pedidoId') pedidoId?: string) {
+
         const pedidos = await this.pedidoService.findAll();
         const produtos = await this.produtoService.findAll();
 
@@ -57,7 +78,8 @@ export class ProdutoPedidoController {
             pedidos,
             produtos,
             pedidoIdSelecionado: pedidoId,
-            rotaAtual: '/produto-pedido'
+            rotaAtual: '/produto-pedido',
+            funcionario: req.session.funcionario
         };
     }
 
@@ -69,7 +91,8 @@ export class ProdutoPedidoController {
 
     @Get(':id/editar')
     @Render('produto-pedido/formulario')
-    async editar(@Param('id') id: string) {
+    async editar(@Req() req, @Param('id') id: string) {
+
         const item = await this.produtoPedidoService.findOne(Number(id));
         const pedidos = await this.pedidoService.findAll();
         const produtos = await this.produtoService.findAll();
@@ -80,7 +103,8 @@ export class ProdutoPedidoController {
             pedidos,
             produtos,
             pedidoIdSelecionado: item?.pedido?.id_ped,
-            rotaAtual: '/produto-pedido'
+            rotaAtual: '/produto-pedido',
+            funcionario: req.session.funcionario
         };
     }
 
@@ -92,12 +116,15 @@ export class ProdutoPedidoController {
 
     @Get(':id/excluir')
     @Render('produto-pedido/excluir')
-    async excluir(@Param('id') id: string) {
+    async excluir(@Req() req, @Param('id') id: string) {
+
         const item = await this.produtoPedidoService.findOne(Number(id));
+
         return {
             titulo: 'Excluir Item',
             item,
-            rotaAtual: '/produto-pedido'
+            rotaAtual: '/produto-pedido',
+            funcionario: req.session.funcionario
         };
     }
 

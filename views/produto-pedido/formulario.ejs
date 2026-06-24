@@ -1,65 +1,54 @@
-      <div class="row">
-        <div class="col-12">
-          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-            <div class="">
-              <h1 class="fs-3 mb-1">Novo produto_pedido</h1>
-              <p class="mb-0">Gerencie seu estoque</p>
-            </div>
-            <div>
-              <a href="inventory.html" class="btn btn-primary">Ver Todos os produto_pedidos</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body p-4">
-<form action="<%= item?.id_ped_pro? '/produto-pedido/' + item.id_ped_pro + '/editar' : '/produto-pedido/criar' %>" method="POST">
+<form action="<%= item?.id_ped_pro ? '/produto-pedido/' + item.id_ped_pro + '/editar' : '/produto-pedido/criar' %>" method="POST">
 
-    <div class="mb-3">
-        <label class="form-label">Produto</label>
-        <select class="form-select" name="produto_id" required>
-            <option value="">Selecione</option>
+<div class="row">
 
-            <% produtos.forEach(produto => { %>
-                <option value="<%= produto.id_pro %>">
-                    <%= produto.nome_pro %>
-                </option>
-            <% }) %>
-        </select>
-    </div>
+  <div class="col-md-6 mb-3">
+    <label class="form-label">Produto</label>
+    <select class="form-select" name="produto_id" required>
+      <option value="">Selecione</option>
 
-    <div class="mb-3">
-        <label class="form-label">Pedido</label>
-        <select class="form-select" name="pedido_id" required>
-            <option value="">Selecione</option>
+      <% (produtos || []).forEach(produto => { %>
+        <option value="<%= produto.id_pro %>"
+          <%= item?.produto?.id_pro === produto.id_pro ? 'selected' : '' %>>
+          <%= produto.nome_pro %>
+        </option>
+      <% }) %>
 
-            <% pedidos.forEach(pedido => { %>
-                <option value="<%= pedido.id_ped %>">
-                    Pedido #<%= pedido.id_ped %>
-                </option>
-            <% }) %>
-        </select>
-    </div>
+    </select>
+  </div>
 
-    <div class="mb-3">
-        <label class="form-label">Quantidade</label>
-        <input type="number" class="form-control" name="quantidade_pro_ped" value="<%= item?.quantidade_pro_ped || '' %>" required>
-    </div>
+  <div class="col-md-6 mb-3">
+    <label class="form-label">Pedido</label>
+    <select class="form-select" name="pedido_id" required>
+      <option value="">Selecione</option>
 
-    <div class="mb-3">
-        <label class="form-label">Preço Unitário</label>
-        <input type="number" step="0.01" class="form-control" name="preco_unitario_pro_ped" value="<%= item?.preco_unitario_pro_ped || '' %>" required>
-    </div>
+      <% (pedidos || []).forEach(pedido => { %>
+        <option value="<%= pedido.id_ped %>"
+          <%= item?.pedido?.id_ped === pedido.id_ped ? 'selected' : '' %>>
+          Pedido #<%= pedido.id_ped %>
+        </option>
+      <% }) %>
 
-    <button type="submit" class="btn btn-primary">
-        Salvar
-    </button>
+    </select>
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <label class="form-label">Quantidade</label>
+    <input type="number" class="form-control" name="quantidade_pro_ped"
+      value="<%= item?.quantidade_pro_ped || '' %>" required>
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <label class="form-label">Preço Unitário</label>
+    <input type="number" step="0.01" class="form-control" name="preco_unitario_pro_ped"
+      value="<%= item?.preco_unitario_pro_ped || '' %>" required>
+  </div>
+
+</div>
+
+<div class="d-flex gap-2">
+  <button type="submit" class="btn btn-primary">Salvar</button>
+  <button type="reset" class="btn btn-secondary">Limpar</button>
+</div>
 
 </form>
-
-</div>
-</div>
-</div>
-</div>

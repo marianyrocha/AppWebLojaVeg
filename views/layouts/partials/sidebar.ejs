@@ -1,31 +1,99 @@
- <aside id="sidebar" class="sidebar">
-    <div class="logo-area">
-     <a href="/" class="d-inline-flex"><img src="/public/images/logo-icon.svg" alt="" width="24">
-        <span class="logo-text ms-2"> <img src="/public/images/logo.svg" alt=""></span>
+<%
+const isGerente = funcionario?.cargo?.id_car === 2;
+%>
+
+<aside id="sidebar" class="sidebar">
+
+  <div class="logo-area">
+    <a href="/" class="d-inline-flex">
+      <img src="/public/images/logo-icon.svg" alt="" width="24">
+      <span class="logo-text ms-2">
+        <img src="/public/images/logo.svg" alt="">
+      </span>
+    </a>
+  </div>
+
+  <ul class="nav flex-column">
+
+    <li class="px-4 py-2"><small class="nav-text">Principal</small></li>
+
+    <li>
+      <a class="nav-link <%= rotaAtual === '/' ? 'active' : '' %>" href="/">
+        <i class="ti ti-home"></i><span class="nav-text">Home</span>
       </a>
-    </div>
+    </li>
 
-    <ul class="nav flex-column">
-      <li class="px-4 py-2"><small class="nav-text">Principal</small></li>
-      <li><a class="nav-link <%= rotaAtual === '/' ? 'active' : '' %>" href="/"><i class="ti ti-home"></i><span class="nav-text">Home</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/produtos' ? 'active' : '' %>" href="/produtos"><i class="ti ti-box-seam"></i><span class="nav-text">Todos os Produtos</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/pedidos' ? 'active' : '' %>" href="/pedidos"><i class="ti ti-box-seam"></i><span class="nav-text">Todos os Pedidos</span></a></li>
-      <li class="px-4 py-2"><small class="nav-text">Cadastros</small></li>
+    <li>
+      <a class="nav-link <%= rotaAtual === '/produtos' ? 'active' : '' %>" href="/produtos">
+        <i class="ti ti-box-seam"></i><span class="nav-text">Todos os Produtos</span>
+      </a>
+    </li>
 
-      <li><a class="nav-link <%= rotaAtual === '/produtos/criar' ? 'active' : '' %>" href="/produtos/criar"><i class="ti ti-plus"></i><span class="nav-text">Produto</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/pedidos/criar' ? 'active' : '' %>" href="/pedidos/criar"><i class="ti ti-plus"></i><span class="nav-text">Pedido</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/clientes/criar' ? 'active' : '' %>" href="/clientes/criar"><i class="ti ti-plus"></i><span class="nav-text">Cliente</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/funcionarios/criar' ? 'active' : '' %>" href="/funcionarios/criar"><i class="ti ti-plus"></i><span class="nav-text">Funcionario</span></a></li>
+    <li>
+      <a class="nav-link <%= rotaAtual === '/pedidos' ? 'active' : '' %>" href="/pedidos">
+        <i class="ti ti-box-seam"></i><span class="nav-text">Todos os Pedidos</span>
+      </a>
+    </li>
 
-      <li class="px-4 py-2"><small class="nav-text">Pedidos</small></li>
-      <li><a class="nav-link <%= rotaAtual === '/produto-fornecedor' ? 'active' : '' %>" href="/produto-fornecedor"><i class="ti ti-box-seam"></i><span class="nav-text">Catálogo</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/produto-fornecedor/criar' ? 'active' : '' %>" href="/produto-fornecedor/criar"><i class="ti ti-box-seam"></i><span class="nav-text">Vincular Produtos</span></a></li>
+    <li class="px-4 py-2"><small class="nav-text">Cadastros</small></li>
 
-      <li class="px-4 py-2"><small class="nav-text">Conta</small></li>
-      <li><a class="nav-link <%= rotaAtual === '/produto-pedido/relatorio' ? 'active' : '' %>" href="/produto-pedido/relatorio"><i class="ti ti-box-seam"></i><span class="nav-text">Relatório</span></a></li>
-      <li><a class="nav-link <%= rotaAtual === '/login' ? 'active' : '' %>" href="/login"><i class="ti ti-box-seam"></i><span class="nav-text">Sair</span></a></li>
+    <li>
+      <a class="nav-link <%= rotaAtual === '/produtos/criar' ? 'active' : '' %>" href="/produtos/criar">
+        <i class="ti ti-plus"></i><span class="nav-text">Produto</span>
+      </a>
+    </li>
 
-     
-    </ul>
+    <li>
+      <a class="nav-link <%= rotaAtual === '/pedidos/criar' ? 'active' : '' %>" href="/pedidos/criar">
+        <i class="ti ti-plus"></i><span class="nav-text">Pedido</span>
+      </a>
+    </li>
 
-  </aside>
+    <li>
+      <a class="nav-link <%= rotaAtual === '/clientes/criar' ? 'active' : '' %>" href="/clientes/criar">
+        <i class="ti ti-plus"></i><span class="nav-text">Cliente</span>
+      </a>
+    </li>
+
+    <% if (isGerente) { %>
+      <li>
+        <a class="nav-link <%= rotaAtual === '/funcionarios' ? 'active' : '' %>" href="/funcionarios">
+          <i class="ti ti-user"></i>
+          <span class="nav-text">Funcionário</span>
+        </a>
+      </li>
+    <% } %>
+
+    <li class="px-4 py-2"><small class="nav-text">Pedidos</small></li>
+
+    <li>
+      <a class="nav-link <%= rotaAtual === '/produto-fornecedor' ? 'active' : '' %>" href="/produto-fornecedor">
+        <i class="ti ti-box-seam"></i><span class="nav-text">Catálogo</span>
+      </a>
+    </li>
+
+    <li>
+      <a class="nav-link <%= rotaAtual === '/produto-fornecedor/criar' ? 'active' : '' %>" href="/produto-fornecedor/criar">
+        <i class="ti ti-box-seam"></i><span class="nav-text">Vincular Produtos</span>
+      </a>
+    </li>
+
+    <li class="px-4 py-2"><small class="nav-text">Conta</small></li>
+
+    <% if (isGerente) { %>
+      <li>
+        <a class="nav-link <%= rotaAtual === '/produto-pedido/relatorio' ? 'active' : '' %>" href="/produto-pedido/relatorio">
+          <i class="ti ti-report"></i><span class="nav-text">Relatórios</span>
+        </a>
+      </li>
+    <% } %>
+
+    <li>
+      <a class="nav-link <%= rotaAtual === '/login' ? 'active' : '' %>" href="/login">
+        <i class="ti ti-logout"></i><span class="nav-text">Sair</span>
+      </a>
+    </li>
+
+  </ul>
+
+</aside>
